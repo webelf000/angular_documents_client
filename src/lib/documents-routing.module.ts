@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { DocumentsComponent } from '@libs/documents/src/lib/documents.component';
+import { AuthGuard } from '@libs/midgard-angular/src/lib/modules/oauth/auth.guard';
+import { DocumentMainComponent } from '@libs/documents/src/lib/pages/documents-main/document-main.component';
 
 const documentsRoutes: Routes = [
-  {
-    path: '', component: DocumentsComponent
-  }
+  { path: '', component: DocumentMainComponent, outlet: 'documents', canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -1,0 +1,10 @@
+@import "../../../../../../src/styles/global";
+
+.documents {
+    background-color: $white;
+}
+.dropzone {
+    margin-top: rem-calc(20);
+    min-height: rem-calc(200);
+    background-color: #f00;
+}

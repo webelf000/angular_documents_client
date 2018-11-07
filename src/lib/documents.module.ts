@@ -21,6 +21,11 @@ import { CommonModule } from '@angular/common';
 import { MgDragAndDropModule } from '@libs/midgard-angular/src/lib/components/drag-and-drop/drag-and-drop.module';
 import { LoaderModule } from '@libs/midgard-angular/src/lib/components/loader/loader.module';
 import { CardModule } from '@libs/midgard-angular/src/lib/components/card/card.module';
+import { IconModule } from '@libs/midgard-angular/src/lib/components/icon/icon.module';
+import { GridFormsModule } from '@libs/midgard-angular/src/lib/components/form-elements/grid-forms/grid-forms.module';
+import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
+import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
+import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
 
 @NgModule({
   imports: [
@@ -37,7 +42,9 @@ import { CardModule } from '@libs/midgard-angular/src/lib/components/card/card.m
     TableModule,
     MgDragAndDropModule,
     LoaderModule,
-    CardModule
+    IconModule,
+    CardModule,
+    GridFormsModule
   ],
   declarations: [
     DocumentMainComponent,
@@ -49,6 +56,11 @@ import { CardModule } from '@libs/midgard-angular/src/lib/components/card/card.m
     DocumentFormComponent,
     BackgroundImageDirective,
     PictureListItemComponent
+  ],
+  providers: [
+    FileExtensionHelper,
+    FileSavingService,
+    ImageLoadingService
   ],
   exports: [DocumentMainComponent]
 })

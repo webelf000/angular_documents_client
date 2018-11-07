@@ -6,6 +6,8 @@
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   },
   "dependencies": {
+    "midgard-core": "0.0.23",
+    "moment": "^2.22.2",
     "redux-observable": "^1.0.0"
   }
 }

@@ -11,20 +11,20 @@
     <ng-template #showPictures>
       <mg-ui-card>
         <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>
-        <mg-ui-card-content>
-              <mg-picture-list
-                  [pictureList]="pictureList$ | async"
-                  (docToPreview)="setPreviwedDoc($event)"
-                  (delete)="openDeleteConfirmModal($event)">
-                </mg-picture-list>
-        </mg-ui-card-content>
+        <!--<mg-ui-card-content>-->
+              <!--<mg-picture-list-->
+                  <!--[pictureList]="pictureList$ | async"-->
+                  <!--(docToPreview)="setPreviwedDoc($event)"-->
+                  <!--(delete)="openDeleteConfirmModal($event)">-->
+                <!--</mg-picture-list>-->
+        <!--</mg-ui-card-content>-->
       </mg-ui-card>
-      <mg-document-list
-          [documentList]="documentList$ | async"
-          [projects] = "projectList$ | async"
-          (docToPreview)="setPreviwedDoc($event)"
-          (delete)="openDeleteConfirmModal($event)">
-        </mg-document-list>
+      <!--<mg-document-list-->
+          <!--[documentList]="documentList$ | async"-->
+          <!--[projects] = "projectList$ | async"-->
+          <!--(docToPreview)="setPreviwedDoc($event)"-->
+          <!--(delete)="openDeleteConfirmModal($event)">-->
+        <!--</mg-document-list>-->
       </ng-template>
   </div>
 </div>

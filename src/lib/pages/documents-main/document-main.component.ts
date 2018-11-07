@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
+import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
 import { loadCoreuserData } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.actions';
 import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
 import { coreuserReducer } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.reducer';
 import { workflowlevel2Reducer } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.reducer';
+import { selectDocuments, selectPictures } from '@libs/documents/src/lib/state/documents.selectors';
+import { loadDocuments } from '@libs/documents/src/lib/state/documents.actions';
 
 
 @Component({
@@ -49,12 +51,14 @@ export class DocumentMainComponent implements OnInit {
      */
     this.store.dispatch(loadWorkflowLevel2());
     this.store.dispatch(loadCoreuserData());
+    this.store.dispatch(loadDocuments());
     // load TolaUsers
-    this.tolaUserList$ = this.getTolaUsers();
+    this.tolaUserList$ = this.getCoreUsers();
     // // load pictures
-    // this.pictureList$ = this.store.select(fromDocumentsSelectors.selectPictures);
+    this.pictureList$ = this.store.observable.pipe(select(selectPictures));
+    console.log(this.pictureList$)
     // // load documents(pdfs)
-    // this.documentList$ = this.store.select(fromDocumentsSelectors.selectDocuments);
+    this.documentList$ = this.store.observable.pipe(select(selectDocuments));
   }
 
   /**
@@ -97,7 +101,7 @@ export class DocumentMainComponent implements OnInit {
    * load CoreUsers
    * @return {Observable} - of type Coreuser Array
    */
-  public getTolaUsers(): Observable<any> {
+  public getCoreUsers(): Observable<any> {
 
     return this.store.observable.pipe(
       select('coreuserReducer', 'data'),
@@ -119,8 +123,6 @@ export class DocumentMainComponent implements OnInit {
    * @return {Observable} - of WorkflowLevel2 Array
    */
   public getWorkFlowLevel2(): Observable<any> {
-
-
     return this.store.observable.pipe(
       select('workflowlevel2Reducer', 'data'),
       map((projects) => {

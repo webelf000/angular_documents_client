@@ -1,7 +1,7 @@
 // Load All
-export const LOAD_ALL_DOCUMENT = 'LOAD_ALL_DOCUMENT';
-export const LOAD_ALL_DOCUMENT_COMMIT = 'LOAD_ALL_DOCUMENT_COMMIT';
-export const LOAD_ALL_DOCUMENT_FAIL = 'LOAD_ALL_DOCUMENT_FAIL';
+export const LOAD_ALL_DOCUMENTS = 'LOAD_ALL_DOCUMENTS';
+export const LOAD_ALL_DOCUMENTS_COMMIT = 'LOAD_ALL_DOCUMENTS_COMMIT';
+export const LOAD_ALL_DOCUMENTS_FAIL = 'LOAD_ALL_DOCUMENTS_FAIL';
 
 // Load One
 export const LOAD_ONE_DOCUMENT = 'LOAD_ONE_DOCUMENT';
@@ -23,23 +23,25 @@ export const DELETE_DOCUMENT = 'DELETE_DOCUMENT';
 export const DELETE_DOCUMENT_COMMIT = 'DELETE_DOCUMENT_COMMIT';
 export const DELETE_DOCUMENT_FAIL = 'DELETE_DOCUMENT_FAIL';
 
+// Save blob URL
+export const SAVE_BLOB_URL = 'SAVE_BLOB_URL';
 
-export function loadDocument() {
+export function loadDocuments() {
   return {
-    type: LOAD_ALL_DOCUMENT,
+    type: LOAD_ALL_DOCUMENTS,
   };
 }
 
-export function loadDocumentCommit(data) {
+export function loadDocumentsCommit(data) {
   return {
-    type: LOAD_ALL_DOCUMENT_COMMIT,
+    type: LOAD_ALL_DOCUMENTS_COMMIT,
     data
   };
 }
 
-export function loadDocumentFail(error) {
+export function loadDocumentsFail(error) {
   return {
-    type: LOAD_ALL_DOCUMENT_FAIL,
+    type: LOAD_ALL_DOCUMENTS_FAIL,
     error
   };
 }
@@ -128,5 +130,12 @@ export function deleteDocumentFail(error) {
   return {
     type: DELETE_DOCUMENT_FAIL,
     error
+  };
+}
+
+export function saveBlobUrl(data) {
+  return {
+    type: SAVE_BLOB_URL,
+    data
   };
 }

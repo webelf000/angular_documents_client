@@ -5,7 +5,7 @@ import { AuthGuard } from '@libs/midgard-angular/src/lib/modules/oauth/auth.guar
 import { DocumentMainComponent } from '@libs/documents/src/lib/pages/documents-main/document-main.component';
 
 const documentsRoutes: Routes = [
-  { path: '', component: DocumentMainComponent, outlet: 'documents', canActivate: [AuthGuard]},
+  { path: '', component: DocumentMainComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -1,23 +1,29 @@
-import { redux } from 'midgard-core';
 import { getAllWorkflowLevel2s } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
 import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
 import { Document } from '@libs/documents/src/lib/state/models/document.model';
+import { reselect } from '@libs/midgard-angular/src/lib/modules/store';
 
 const helper = new FileExtensionHelper();
 
 const getDocuments = state => state.documentsReducer;
 
-export const getAllDocuments = redux.createSelector(
+export const getAllDocuments = reselect.createSelector(
   getDocuments,
   (documents) => {
     return documents.data;
   }
 );
 
+export const getDocumentsLoaded = reselect.createSelector(
+  getDocuments,
+  (documents) => {
+    return documents.dataLoaded;
+  }
+);
 /**
  * @returns {MemoizedSelector<AppState, any>} returning the pictures
  */
-export const selectPictures = redux.createSelector(
+export const selectPictures = reselect.createSelector(
   getAllDocuments,
   getAllWorkflowLevel2s,
   (documents: Document[], workflowLevel2s) => {
@@ -40,7 +46,7 @@ export const selectPictures = redux.createSelector(
 /**
  * @returns {MemoizedSelector<AppState, any>} returning the documnets
  */
-export const selectDocuments = redux.createSelector(
+export const selectDocuments = reselect.createSelector(
   getAllDocuments,
   getAllWorkflowLevel2s,
   (documents: Document[], workflowLevel2s) => {
@@ -96,6 +102,6 @@ export const getTime = (date: string) => {
  * @param {number} id - id of the document
  * @returns {MemoizedSelector<any, any>}
  */
-export const selectDocument = (id: number) => redux.createSelector(getDocuments, (documents) => {
+export const selectDocument = (id: number) => reselect.createSelector(getDocuments, (documents) => {
   return documents.find( document => document.id.toString() === id.toString());
 });

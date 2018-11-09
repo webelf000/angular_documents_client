@@ -6,8 +6,8 @@
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   },
   "dependencies": {
-    "midgard-core": "0.0.23",
+    "@ngx-translate/core": "^11.0.0",
     "moment": "^2.22.2",
-    "redux-observable": "^1.0.0"
+    "rxjs": "^6.3.3"
   }
 }

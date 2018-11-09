@@ -26,11 +26,14 @@ import { GridFormsModule } from '@libs/midgard-angular/src/lib/components/form-e
 import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
 import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
+import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
+import { DocumentModalComponent } from './components/document-modal/document-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DocumentsRoutingModule,
+    MidgardSharedTranslationModule,
     MidgardModule,
     MatSnackBarModule,
     MatDialogModule,
@@ -55,13 +58,17 @@ import { ImageLoadingService } from '@libs/documents/src/lib/services/image-load
     DocumentPreuploadComponent,
     DocumentFormComponent,
     BackgroundImageDirective,
-    PictureListItemComponent
+    PictureListItemComponent,
+    DocumentModalComponent
   ],
   providers: [
     FileExtensionHelper,
     FileSavingService,
     ImageLoadingService
   ],
+  entryComponents: [
+    DocumentModalComponent
+  ],
   exports: [DocumentMainComponent]
 })
-export class DocumentsModule { }
+export class DocumentsModule {}

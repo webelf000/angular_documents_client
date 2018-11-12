@@ -1,0 +1,23 @@
+@import "../../../../../../src/styles/global";
+
+.modal-close {
+  &__icon {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    color: #000;
+    font-size: 0.75rem;
+    background-color: #eeeeee;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    &:focus {
+      outline:0
+    }
+  }
+}
+
+.mat-dialog-content {
+  max-height: 600px !important;
+  height: 500px !important;
+}

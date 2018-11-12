@@ -6,8 +6,6 @@ import { MidgardModule } from '@libs/midgard-angular/src/lib/midgard.module';
 import { ButtonModule } from '@libs/midgard-angular/src/lib/components/button/button.module';
 import { TopBarModule } from '@libs/midgard-angular/src/lib/components/top-bar-actions/top-bar.module';
 import { MgSpinnerModule } from '@libs/midgard-angular/src/lib/components/spinner/spinner.module';
-import { MgModalModule } from '@libs/midgard-angular/src/lib/components/modal/modal.module';
-import { MgModalConfirmModule } from '@libs/midgard-angular/src/lib/components/modal-confirm/modal-confirm.module';
 import { PictureListItemComponent } from '@libs/documents/src/lib/components/picture-list/picture-list-item/picture-list-item.component';
 import { DocumentFormComponent } from '@libs/documents/src/lib/components/document-form/document-form.component';
 import { DocumentAddComponent } from '@libs/documents/src/lib/components/document-add/document-add.component';
@@ -27,21 +25,23 @@ import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extens
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
 import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
 import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
+import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
 import { DocumentModalComponent } from './components/document-modal/document-modal.component';
+import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
 
 @NgModule({
   imports: [
     CommonModule,
     DocumentsRoutingModule,
     MidgardSharedTranslationModule,
+    MidgardStoreModule,
     MidgardModule,
     MatSnackBarModule,
     MatDialogModule,
     ButtonModule,
     TopBarModule,
     MgSpinnerModule,
-    MgModalModule,
-    MgModalConfirmModule,
+    DeleteConfirmationModule,
     TableModule,
     MgDragAndDropModule,
     LoaderModule,

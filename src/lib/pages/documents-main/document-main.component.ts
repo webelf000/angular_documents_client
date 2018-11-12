@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
@@ -7,11 +6,13 @@ import { loadCoreuserData } from '@libs/midgard-angular/src/lib/state/coreuser/c
 import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { coreuserReducer } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.reducer';
-import { workflowlevel2Reducer } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.reducer';
-import { selectDocuments, selectPictures } from '@libs/documents/src/lib/state/documents.selectors';
+import { getDocumentsLoaded, selectDocuments, selectPictures } from '@libs/documents/src/lib/state/documents.selectors';
 import { loadDocuments } from '@libs/documents/src/lib/state/documents.actions';
 import { DocumentModalComponent } from '@libs/documents/src/lib/components/document-modal/document-modal.component';
+import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
+import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.selectors';
+import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,157 +20,140 @@ import { DocumentModalComponent } from '@libs/documents/src/lib/components/docum
   templateUrl: './document-main.component.html',
   styleUrls: ['./document-main.component.scss']
 })
-export class DocumentMainComponent {
-  // public documentFormModal: Subject<any> = new Subject();
-  // public deleteTube: Subject<any> = new Subject();
-  // public tolaUserList$: Observable<any>;
-  // public projectList$: Observable<any>;
-  // public oauthUser$: Observable<any>;
-  // public pictureList$: Observable<any>;
-  // public documentList$: Observable<any>;
-  // public isLoading$: Observable<any>;
-  // public isEditing$: Observable<any>;
-  // public isCreating$: Observable<any>;
+export class DocumentMainComponent implements OnInit {
+  public coreUserList: Observable<any>;
+  public workflowLevel2List: Observable<any>;
+  public currentWorkflowLevel2: Observable<any>;
+  public oauthUser$: Observable<any>;
+  public pictureList: Observable<any>;
+  public documentList: Observable<any>;
+  public currentDoc;
   // public projects = [];
-  // public currentDoc;
-  // public docToDelete;
-  // public contactUiid: string | undefined;
+  public documentsLoaded: Observable<any>;
   // public showHeader = false;
-  public isEdit = false;
   // public translatedDeleteMessage: string;
-  // public test_translation;
   constructor(
-    public dialog: MatDialog
-    // private store: Store<any>,
-    // private httpService: HttpService,
-    // private translateService: MidgardTranslateService,
-    // private snackBar: MatSnackBar
+    public dialog: MatDialog,
+    private store: Store<any>,
+    private httpService: HttpService,
+    private translateService: MidgardTranslateService,
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) {}
 
-  // ngOnInit() {
-  //   this.test_translation = this.translateService.instant('DOCUMENTS.MAIN.UPLOAD_DOCUMENTS');
-  //   // load pictures
-  //   this.pictureList$ = this.store.observable.pipe(select('documentsReducer', 'data'));
-  //   // load documents(pdfs)
-  //   this.documentList$ = this.store.observable.pipe(select('documentsReducer', 'data'));
-  //   /**
-  //    * dispatch LOAD actions
-  //    */
-  //   this.store.dispatch(loadWorkflowLevel2());
-  //   this.store.dispatch(loadCoreuserData());
-  //   this.store.dispatch(loadDocuments());
-  //   // load TolaUsers
-  //   this.tolaUserList$ = this.getCoreUsers();
-  // }
-  //
+  ngOnInit() {
+    this.getCurrentWorkflowLevel2();
+    // load pictures
+    this.pictureList = this.store.observable.pipe(select(selectPictures));
+    // load documents(pdfs)
+    this.documentList = this.store.observable.pipe(select(selectDocuments));
+    this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+    /**
+     * dispatch LOAD actions
+     */
+    this.store.dispatch(loadWorkflowLevel2());
+    this.store.dispatch(loadCoreuserData());
+    this.store.dispatch(loadDocuments());
+    this.coreUserList = this.getCoreUsers();
+    this.workflowLevel2List = this.getWorkFlowLevel2();
+  }
+
+  /**
+   * Gets the current workflowlevel2 from the store
+   */
+  getCurrentWorkflowLevel2() {
+    const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
+    this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
+  }
+
   /**
    * @description - open upload document/picture form modal
    */
   public openDocumentFormModal() {
-    this.isEdit = false;
     const dialogRef = this.dialog.open(DocumentModalComponent, {
-      width: '250px',
+      data: {
+        coreUsers: this.coreUserList,
+        workflowLevel2s: this.workflowLevel2List,
+        currentWorkflowLevel2: this.currentWorkflowLevel2,
+        isEdit: false
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  /**
+   * gets the doc to be preview
+   * @param {object} document - document form object
+   */
+  public setPreviwedDoc(document) {
+    const dialogRef = this.dialog.open(DocumentModalComponent, {
+      data: {
+        coreUsers: this.coreUserList,
+        workflowLevel2s: this.workflowLevel2List,
+        currentWorkflowLevel2: this.currentWorkflowLevel2,
+        isEdit: true,
+        document
+      }
     });
-    // this.documentFormModal.next('open');
   }
   //
-  // /**
-  //  * @description - open upload document/picture form modal
-  //  */
-  // public closeDocumentFormModal() {
-  //   this.documentFormModal.next('close');
-  // }
+  /**
+   * load CoreUsers
+   * @return {Observable} - of type Coreuser Array
+   */
+  public getCoreUsers(): Observable<any> {
+
+    return this.store.observable.pipe(
+      select(getAllCoreUsers),
+      map((users) => {
+        const usersOptions: any[] = [];
+        users.forEach((user) => {
+          usersOptions.push({
+            label: user.name,
+            value: user.core_user_uuid
+          });
+        });
+        return usersOptions;
+      })
+    );
+  }
+
+  /**
+   * @description - Load WorkflowLevel2
+   * @return {Observable} - of WorkflowLevel2 Array
+   */
+  public getWorkFlowLevel2(): Observable<any> {
+    return this.store.observable.pipe(
+      select(getAllWorkflowLevel2s),
+      map((projects) => {
+        const projectOptions: any[] = [];
+        projects.data.forEach((project) => {
+          projectOptions.push({
+            label: project.name,
+            value: project.level2_uuid
+          });
+        });
+        return projectOptions;
+      })
+    );
+  }
+
+  /***
+   * @description - get time method
+   * @param {string} date - date
+   */
+  private getTime(date) {
+    return date != null ? new Date(date).getTime() : 0;
+  }
   //
-  // /**
-  //  * @description - delete a document: dispatches an action to delete a document
-  //  */
-  // public deleteDocument() {
-  //   if (this.docToDelete) {
-  //     // this.store.dispatch(new DeleteDocument({ document: this.docToDelete }));
-  //   }
-  //   this.closeDeleteConfirmModal();
-  //   this.closeDocumentFormModal();
-  // }
-  //
-  // /**
-  //  * gets the doc to be preview
-  //  * @param {object} document - document form object
-  //  */
-  // public setPreviwedDoc(document) {
-  //   this.currentDoc = document;
-  //   this.isEdit = true;
-  //   this.documentFormModal.next('open');
-  // }
-  //
-  // /**
-  //  * load CoreUsers
-  //  * @return {Observable} - of type Coreuser Array
-  //  */
-  // public getCoreUsers(): Observable<any> {
-  //
-  //   return this.store.observable.pipe(
-  //     select('coreuserReducer', 'data'),
-  //     map((users) => {
-  //       const projectOptions: any[] = [];
-  //       users.forEach((user) => {
-  //         projectOptions.push({
-  //           label: user.name,
-  //           value: user.tola_user_uuid
-  //         });
-  //       });
-  //       return projectOptions;
-  //     })
-  //   );
-  // }
-  //
-  // /**
-  //  * @description - Load WorkflowLevel2
-  //  * @return {Observable} - of WorkflowLevel2 Array
-  //  */
-  // public getWorkFlowLevel2(): Observable<any> {
-  //   return this.store.observable.pipe(
-  //     select('workflowlevel2Reducer', 'data'),
-  //     map((projects) => {
-  //       const projectOptions: any[] = [];
-  //       projects.forEach((project) => {
-  //         projectOptions.push({
-  //           label: project.name,
-  //           value: project.level2_uuid
-  //         });
-  //       });
-  //       return projectOptions;
-  //     })
-  //   );
-  // }
-  //
-  // /***
-  //  * @description - get time method
-  //  * @param {string} date - date
-  //  */
-  // private getTime(date) {
-  //   return date != null ? new Date(date).getTime() : 0;
-  // }
-  //
-  // /**
-  //  * @description - open delete confirmation modal & sets the docToDelete to this document
-  //  * @param {object} document - document object to be deleted
-  //  */
-  // public openDeleteConfirmModal(document) {
-  //   this.docToDelete = document;
-  //   const translateParams = {
-  //     projectName: this.docToDelete.file_name
-  //   };
-  //   this.translatedDeleteMessage = this.translateService.instant(`DOCUMENTS.DELETE_MODAL.DELETE_PROMPT`, translateParams);
-  //   this.deleteTube.next('open');
-  // }
-  // /**
-  //  * close delete confirmation modal
-  //  */
-  // public closeDeleteConfirmModal() {
-  //   this.deleteTube.next('close');
-  // }
+  /**
+   * @description - open delete confirmation modal & sets the docToDelete to this document
+   * @param {object} document - document object to be deleted
+   */
+  public openDeleteConfirmModal(document) {
+    const translateParams = {
+      projectName: document.file_name
+    };
+  }
 }

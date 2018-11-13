@@ -13,6 +13,7 @@ import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angul
 import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.selectors';
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 
 
 @Component({
@@ -27,7 +28,6 @@ export class DocumentMainComponent implements OnInit {
   public oauthUser$: Observable<any>;
   public pictureList: Observable<any>;
   public documentList: Observable<any>;
-  public currentDoc;
   // public projects = [];
   public documentsLoaded: Observable<any>;
   // public showHeader = false;
@@ -146,14 +146,21 @@ export class DocumentMainComponent implements OnInit {
   private getTime(date) {
     return date != null ? new Date(date).getTime() : 0;
   }
-  //
+
   /**
    * @description - open delete confirmation modal & sets the docToDelete to this document
    * @param {object} document - document object to be deleted
    */
   public openDeleteConfirmModal(document) {
-    const translateParams = {
-      projectName: document.file_name
-    };
+    const message = this.translateService.instant('DOCUMENT.DOCUMENT_MODAL.DELETE_PROMPT');
+    const title = this.translateService.instant('DOCUMENT.DOCUMENT_MODAL.CONFIRM_DELETE');
+    this.dialog.open(DeleteConfirmationComponent, {
+      data: {
+        deleteAction: 'DELETE_DOCUMENT',
+        elementToDelete: document,
+        message: `${message} ${document.file_name}?`,
+        title: title
+      }
+    });
   }
 }

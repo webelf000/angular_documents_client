@@ -56,7 +56,7 @@ const createDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(CREATE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('post', `${environment.DOCS_API}/documents/`, action.data).pipe(
+      return httpService.makeRequest('post', `${environment.DOCS_API}/documents/`, action.data, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => createDocumentCommit(res.data, action.nested)),
         // If request fails, dispatch failed action

@@ -167,6 +167,8 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
         } else {
           document.workflowlevel2_uuids = [this.currentWorkflowLevel2.level2_uuid];
         }
+        document.contact_uuid = this.currentWorkflowLevel2.level2_uuid;
+
         if (this.fileToPreview) {
           if (moment(document.create_date, 'DD.MM.YYYY').isValid()) {
             document.create_date = moment(document.create_date, 'DD.MM.YYYY').format(
@@ -222,20 +224,6 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
     this.documentForm.reset(this.documentObject);
   }
 
-  /**
-   * Close document form modal
-   * @description - close document form modal
-   * @description - reset document form
-   * @description - emit removeFile value to parent; reset form on document form modal close
-   */
-  public closeModal() {
-    this.modal.next('close');
-    // reset form on modal close and remove file from drag-drop area
-    if (!this.isEditForm) {
-      this.removeFile.emit(this.fileToUpload);
-      this.resetForm();
-    }
-  }
 
   /**
    * @description - check if a date has been selected

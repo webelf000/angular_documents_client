@@ -16,10 +16,6 @@ export class DocumentModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   /**
    * @description - open delete confirmation modal & sets the docToDelete to this document
    * @param {object} document - document object to be deleted
@@ -36,4 +32,9 @@ export class DocumentModalComponent {
       }
     });
   }
+
+  closeModal() {
+    this.dialogRef.close();
+  }
+
 }

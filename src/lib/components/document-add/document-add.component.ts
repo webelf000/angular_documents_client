@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, OnChanges, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
@@ -21,10 +21,11 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
   @Input() userSelectOptions;
   @Input() projectSelectOptions;
   @Input() selectedContact = {};
-  @Input() modal: Subject<any> = new Subject();
   @Input() currentContactUuuid;
   @Input() currentDocument;
   @Input() contactUiid;
+  @Output() documentAdded: EventEmitter<any> = new EventEmitter();
+
   public showButtonSpinner = false;
   public selectedOauthUser: any = {};
   public isFileSelected = false;
@@ -67,8 +68,8 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
       this.store.dispatch(createDocument(documentFormObject));
       this.createDocumentAdded = this.store.observable.pipe(select(getDocumentsLoaded));
       this.createDocumentSubscription = this.createDocumentAdded.subscribe((uploaded: boolean) => {
+        this.documentAdded.emit();
         if (!uploaded) {
-          this.modal.next('close');
           this.clearFile(documentFormObject);
         }
       });

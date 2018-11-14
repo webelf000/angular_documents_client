@@ -7,6 +7,7 @@
     [userSelectOptions]="data.coreUsers | async"
     [projectSelectOptions]="data.workflowLevel2s | async"
     [currentWorkflowLevel2]="data.currentWorkflowLevel2 | async"
+    (documentAdded)= "closeModal()"
   >
   </mg-document-add>
   <mg-document-preview

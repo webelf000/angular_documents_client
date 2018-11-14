@@ -22,8 +22,9 @@ export const getDocumentsLoaded = reselect.createSelector(
 );
 /**
  * @returns {MemoizedSelector<AppState, any>} returning the pictures
+ * @param {string} projectUuid - current project uuid
  */
-export const selectPictures = reselect.createSelector(
+export const selectProjectPictures = (projectUuid: string) => reselect.createSelector(
   getAllDocuments,
   getAllWorkflowLevel2s,
   (documents: Document[], workflowLevel2s) => {
@@ -39,14 +40,15 @@ export const selectPictures = reselect.createSelector(
     pictures.sort((a, b) => {
       return getTime(b.create_date) - getTime(a.create_date);
     });
-    return pictures;
+    return pictures.filter( document => document.workflowlevel2_uuids.includes(projectUuid));
   }
 );
 
 /**
  * @returns {MemoizedSelector<AppState, any>} returning the documnets
+ * @param {string} projectUuid - current project uuid
  */
-export const selectDocuments = reselect.createSelector(
+export const selectProjectDocuments = (projectUuid: string) => reselect.createSelector(
   getAllDocuments,
   getAllWorkflowLevel2s,
   (documents: Document[], workflowLevel2s) => {
@@ -60,7 +62,7 @@ export const selectDocuments = reselect.createSelector(
     docs.sort((a, b) => {
       return getTime(b.create_date) - getTime(a.create_date);
     });
-    return docs;
+    return docs.filter( document => document.workflowlevel2_uuids.includes(projectUuid));
   }
 );
 

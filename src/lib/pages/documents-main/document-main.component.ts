@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
@@ -6,7 +6,11 @@ import { loadCoreuserData } from '@libs/midgard-angular/src/lib/state/coreuser/c
 import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { getDocumentsLoaded, selectDocuments, selectPictures } from '@libs/documents/src/lib/state/documents.selectors';
+import {
+  getDocumentsLoaded,
+  selectProjectDocuments,
+  selectProjectPictures
+} from '@libs/documents/src/lib/state/documents.selectors';
 import { loadDocuments } from '@libs/documents/src/lib/state/documents.actions';
 import { DocumentModalComponent } from '@libs/documents/src/lib/components/document-modal/document-modal.component';
 import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
@@ -14,6 +18,7 @@ import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/co
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,17 +26,17 @@ import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/compo
   templateUrl: './document-main.component.html',
   styleUrls: ['./document-main.component.scss']
 })
-export class DocumentMainComponent implements OnInit {
+export class DocumentMainComponent implements OnInit, OnDestroy {
   public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
+  public workflowLevel2Subscription: Subscription;
   public oauthUser$: Observable<any>;
   public pictureList: Observable<any>;
   public documentList: Observable<any>;
   // public projects = [];
   public documentsLoaded: Observable<any>;
   // public showHeader = false;
-  // public translatedDeleteMessage: string;
   constructor(
     public dialog: MatDialog,
     private store: Store<any>,
@@ -42,12 +47,7 @@ export class DocumentMainComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCurrentWorkflowLevel2();
-    // load pictures
-    this.pictureList = this.store.observable.pipe(select(selectPictures));
-    // load documents(pdfs)
-    this.documentList = this.store.observable.pipe(select(selectDocuments));
-    this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+    this.getDocuments();
     /**
      * dispatch LOAD actions
      */
@@ -61,9 +61,19 @@ export class DocumentMainComponent implements OnInit {
   /**
    * Gets the current workflowlevel2 from the store
    */
-  getCurrentWorkflowLevel2() {
+  getDocuments() {
     const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
     this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
+    let workflowLeveluuid = '';
+    this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
+      workflowLeveluuid = workflowLevel2.level2_uuid;
+      console.log(workflowLeveluuid);
+      // load pictures
+      this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLeveluuid)));
+      // load documents(pdfs)
+      this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLeveluuid)));
+      this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+    });
   }
 
   /**
@@ -162,5 +172,9 @@ export class DocumentMainComponent implements OnInit {
         title: title
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.workflowLevel2Subscription.unsubscribe();
   }
 }

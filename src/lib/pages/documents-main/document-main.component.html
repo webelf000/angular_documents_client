@@ -6,8 +6,8 @@
   </mg-ui-top-bar-actions>
 </mg-ui-top-bar>
 <div class="row">
-  <div class="pictures col-md-9">
-    <mg-spinner *ngIf="!documentsLoaded | async; else showPictures"></mg-spinner>
+  <div class="pictures col-md-9" *ngIf="documentsLoaded && pictureList && documentList;">
+    <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
     <ng-template #showPictures>
       <mg-ui-card>
         <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>

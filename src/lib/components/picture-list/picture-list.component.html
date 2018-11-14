@@ -1,4 +1,4 @@
-<div class="photos" *ngIf="pictureList.length > 0; else noImages">
+<div class="photos" *ngIf="pictureList?.length > 0; else noImages">
   <div class="photos__list">
     <div class="photos__list-grid">
       <ng-container *ngFor="let pic of pictureList | slice: 0:[maxItems]">

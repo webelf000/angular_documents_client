@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './document-main.component.html',
   styleUrls: ['./document-main.component.scss']
 })
-export class DocumentMainComponent implements OnInit, OnDestroy {
+export class DocumentMainComponent implements OnInit, AfterViewInit, OnDestroy {
   public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
@@ -47,7 +47,6 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getDocuments();
     /**
      * dispatch LOAD actions
      */
@@ -58,20 +57,22 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
     this.workflowLevel2List = this.getWorkFlowLevel2();
   }
 
+  ngAfterViewInit() {
+    this.getDocuments();
+  }
+
   /**
    * Gets the current workflowlevel2 from the store
    */
   getDocuments() {
     const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
     this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
-    let workflowLeveluuid = '';
     this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
-      workflowLeveluuid = workflowLevel2.level2_uuid;
-      console.log(workflowLeveluuid);
       // load pictures
-      this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLeveluuid)));
+      this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
       // load documents(pdfs)
-      this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLeveluuid)));
+      this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLevel2.level2_uuid)));
+      // check if the documents are loaded
       this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
     });
   }

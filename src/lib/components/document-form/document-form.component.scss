@@ -1,0 +1,24 @@
+@import "../../../../../../src/styles/global";
+
+.modal-close {
+    &__icon {
+      cursor: pointer;
+      color: $black;
+      font-size: rem-calc(12);
+      background-color: #eeeeee;
+      width: 28px;
+      height: 28px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .document-actions{
+    width: rem-calc(35);
+    padding-top: rem-calc(10);
+    margin-left: rem-calc(15);
+    float: right;
+    cursor: pointer;
+    color: $dark-blue-darker;
+  }

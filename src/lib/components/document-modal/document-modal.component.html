@@ -1,0 +1,23 @@
+<div mat-dialog-content class="modal">
+  <button class="modal-close__icon" mat-dialog-close>
+    <mg-icon svgName="close" fillColor="blue-darkest"></mg-icon>
+  </button>
+  <mg-document-add
+    *ngIf="!data.isEdit"
+    [userSelectOptions]="data.coreUsers | async"
+    [projectSelectOptions]="data.workflowLevel2s | async"
+    [currentWorkflowLevel2]="data.currentWorkflowLevel2 | async"
+  >
+  </mg-document-add>
+  <mg-document-preview
+    *ngIf="data.isEdit"
+    [userSelectOptions]="data.coreUsers | async"
+    [projectSelectOptions]="data.workflowLevel2s | async"
+    [currentWorkflowLevel2]="data.currentWorkflowLevel2 | async"
+    [document]="data.document"
+    (documentDelete)="openDeleteConfirmModal($event)"
+  >
+  </mg-document-preview>
+
+</div>
+<div mat-dialog-actions></div>

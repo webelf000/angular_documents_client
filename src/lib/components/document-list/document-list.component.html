@@ -1,0 +1,10 @@
+<freyja-table
+  #table
+  [rows]="documentList"
+  [columns]="columns"
+  (download)="downloadDocument($event)"
+  (delete)="deleteDocument($event)"
+  (selectItem)="previewDocument($event)"
+  [downloadSpinner]="true"
+>
+</freyja-table>

@@ -1,0 +1,75 @@
+@import "../../../../../../src/styles/global";
+
+.main {
+  display: flex;
+  &__drag-drop {
+    width: 524px;
+    margin: rem-calc(-16 0 -16 -16);
+    &--hidden{
+      display: none;
+    }
+  }
+  &__form {
+    flex: 1;
+    padding-left: rem-calc(16);
+  }
+}
+.preview {
+  display: flex;
+  flex-direction: column;
+  background-color: $gray-very-light;
+  height: 100%;
+  padding: rem-calc(28);
+  &-container{
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    width: 100%;
+    max-height: rem-calc(446);
+    background-color: rgba($black, 0.02);
+    border-radius: rem-calc(4);
+    box-sizing: border-box;
+    text-align: center;
+    line-height: rem-calc(13);
+    transition: all .3s;
+  }
+  &__image-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  &__image{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  &__pdf {
+    height: 100%;
+    width: 100%;
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      zoom: 1;
+      transform: scale(1);
+      transform-origin: 0 0;
+    }
+  }
+  &__others {
+    iframe {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+  &__loader-wrap{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: $gray-very-light;
+  }
+}

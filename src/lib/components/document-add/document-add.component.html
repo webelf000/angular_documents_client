@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="main__drag-drop">
+
+    <mg-drag-and-drop
+      [class.main__drag-drop--hidden]="isFileSelected"
+      [removeFile]="removeFile"
+      [noFileSelected]="noFileSelected"
+      (uploadedDoc)="setFileName($event)"
+      (fileToUpload)="setFileData($event)">
+    </mg-drag-and-drop>
+
+    <mg-document-preupload
+      *ngIf="fileData && isFileSelected"
+      [fileLocalPath]="fileData"
+      [fileUploaded]="file"
+      (cancelDocument)="clearFile($event)">
+    </mg-document-preupload>
+
+  </div>
+  <div class="main__form">
+    <mg-document-form
+      [showButtonSpinner]="showButtonSpinner"
+      [selectedOauthUser]="selectedOauthUser"
+      [currentWorkflowLevel2]="currentWorkflowLevel2"
+      [fileToUpload]="file"
+      (uploadDocument)="onFormSubmit($event)"
+      [userSelectOptions]="userSelectOptions"
+      (removeFile)="clearFile($event)"
+      [projectSelectOptions]="projectSelectOptions">
+    </mg-document-form>
+
+  </div>
+</div>

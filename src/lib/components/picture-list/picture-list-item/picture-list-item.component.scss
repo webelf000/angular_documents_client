@@ -1,0 +1,97 @@
+@import "../../../../../../../src/styles/global";
+
+:host{
+  width: 50%;
+  padding: rem-calc(8 4 0 4);
+  @include media-breakpoint-up(sm) {
+    width: 33.33%;
+  }
+  @include media-breakpoint-up(md) {
+    width: 25%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 20%;
+  }
+
+}
+.loader-wrap{
+  position: relative;
+  background-color: $gray-very-light;
+}
+.loader{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.photo{
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  &:hover {
+    .photo__details{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  &__mask-image{
+    width: 100%;
+    visibility: hidden;
+  }
+  &__details {
+    position: absolute;
+    font-size: rem-calc(11);
+    width: 100%;
+    height: 100%;
+    background-color: rgba($black, .67);
+    line-height: rem-calc(10);
+    padding: rem-calc(15 20 10 10);
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+    color: $white;
+    transition: opacity .3s;
+    &--name {
+      cursor: pointer;
+      font-size: rem-calc(13);
+      font-weight: 600;
+      color: $white;
+      line-height: 1.5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &--date {
+      color: rgba($white, .71);
+    }
+  }
+  &__icons {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    right: 0;
+  }
+  &__actions {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    font-size: rem-calc(15);
+    margin-left: rem-calc(15);
+    cursor: pointer;
+    color: rgba($white, .71);
+    &--delete {
+      margin-right: rem-calc(15);
+    }
+  }
+  &__actions-spinner{
+    position: absolute;
+    top: 2px;
+    left: 0;
+  }
+}

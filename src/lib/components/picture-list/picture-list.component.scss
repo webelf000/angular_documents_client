@@ -1,0 +1,104 @@
+@import "../../../../../../src/styles/global";
+.more-pictures {
+  margin-top: rem-calc(3);
+  margin-bottom: rem-calc(5);
+  &--load-more {
+    color: $orange;
+    font-size: rem-calc(15);
+  }
+  &--icon-arrow {
+    font-size: rem-calc(12);
+    margin-left: rem-calc(10);
+    color: $orange;
+    display: inline-block;
+    position: relative;
+    top: rem-calc(3);
+  }
+}
+.photos{
+  &__list{
+    margin: auto;
+    max-width: 100%;
+  }
+  &__list-grid{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: rem-calc(0 -4);
+  }
+  &__list-preview{
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover {
+      .photos__details{
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  &__list-cell{
+    position: relative;
+    width: calc(50% - 0.5rem);
+    margin: rem-calc(8 4 0 4);
+    background-size: cover;
+    background-position: center;
+    @include media-breakpoint-up(sm) {
+      width: calc(33.33% - 0.5rem);
+    }
+    @include media-breakpoint-up(md) {
+      width: calc(25% - 0.5rem);
+    }
+    @include media-breakpoint-up(lg) {
+      width: calc(20% - 0.5rem);
+    }
+  }
+  &__mask-image{
+    width: 100%;
+    visibility: hidden;
+  }
+  &__details {
+    position: absolute;
+    font-size: rem-calc(11);
+    min-width: 100%;
+    height: 100%;
+    background-color: rgba($black, .67);
+    line-height: rem-calc(10);
+    padding: rem-calc(15 20 10 10);
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+    color: $white;
+    transition: opacity .3s;
+    &--name {
+      cursor: pointer;
+      font-size: rem-calc(13);
+      font-weight: 600;
+      color: $white;
+      line-height: 1.5;
+    }
+    &--date {
+      color: rgba($white, .71);
+    }
+  }
+  &__icons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  &__actions {
+    font-size: rem-calc(15);
+    margin-left: rem-calc(15);
+    cursor: pointer;
+    color: rgba($white, .71);
+    &--delete {
+      margin-right: rem-calc(15);
+    }
+  }
+}
+.no-images {
+  color: $gray-light;
+}

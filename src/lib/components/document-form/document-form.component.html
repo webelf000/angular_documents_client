@@ -1,0 +1,72 @@
+<form [formGroup]="documentForm" (submit)="onFormSubmit(documentForm.value)"novalidate>
+    <mg-ui-form [overflow]="true">
+        <mg-ui-form-row>
+          <mg-ui-form-col>
+          </mg-ui-form-col>
+        </mg-ui-form-row>
+      <mg-ui-form-row>
+        <mg-ui-form-col>
+          <mg-grid-inline
+            labelText="{{'DOCUMENTS.FORM.DOCUMENT_NAME' | translate}}"
+            controlName="file_description"
+            [formGroup]="documentForm"
+            [required]="true"
+            [errors]="formErrors.file_description"
+            [feedback]="formErrors.file_description"
+          >
+          </mg-grid-inline>
+        </mg-ui-form-col>
+      </mg-ui-form-row>
+
+      <mg-ui-form-row>
+        <mg-ui-form-col>
+          <mg-select-grid
+            *ngIf="userSelectOptions"
+            labelText="{{'DOCUMENTS.FORM.ADDED_BY' | translate}}*"
+            controlName="user_uuid"
+            [formGroup]="documentForm"
+            [options]="userSelectOptions"
+            [errors]="formErrors.user_uuid"
+            [feedback]="formErrors.user_uuid">
+          </mg-select-grid>
+        </mg-ui-form-col>
+      </mg-ui-form-row>
+
+      <mg-ui-form-row>
+        <mg-ui-form-col>
+          <mg-date-picker
+            labelText="{{'DOCUMENTS.FORM.DATE' | translate}}"
+            controlName="create_date"
+            inputPlaceholder=""
+            (dateChangeEvent)="onDateChanges()"
+            [required]="true"
+            [fileCreateDate]="currentDate"
+            [formGroup]="documentForm"
+            [errors]="formErrors.create_date"
+            [feedback]="formErrors.create_date"
+            >
+          </mg-date-picker>
+        </mg-ui-form-col>
+      </mg-ui-form-row>
+
+      <mg-ui-form-row>
+        <mg-ui-form-col>
+          <mg-submit-grid
+              [showButtonSpinner]="showButtonSpinner"
+              [submitValue]="'DOCUMENTS.FORM.SAVE' | translate"
+              [disabledSubmit]="(isEditForm && (!documentForm.dirty || !documentForm.valid)) || (!isEditForm && !documentForm.valid)">
+
+            <ng-container *ngIf="isEditForm">
+                <span class="document-actions" (click)="documentDelete()">
+                  <i class="icon-trash"></i>
+                </span>
+                <a class="document-actions" *ngIf="filePath" [href]="filePath" download>
+                  <i class="icon-download"></i>
+                </a>
+            </ng-container>
+
+          </mg-submit-grid>
+        </mg-ui-form-col>
+      </mg-ui-form-row>
+    </mg-ui-form>
+  </form>

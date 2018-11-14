@@ -1,0 +1,13 @@
+@import "../../../../../../src/styles/global";
+
+::ng-deep {
+  .ngx-datatable {
+    .datatable-body {
+      .datatable-body-row {
+        border-top: 1px solid $gray-very-light;
+      }
+      margin-top: -4px !important;
+    }
+  }
+}
+

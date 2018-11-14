@@ -1,0 +1,26 @@
+<div
+  *ngIf="imageUrl; else loading"
+  class="photo photo__list-preview" [style.backgroundImage]="imageUrl">
+  <img src="../assets/img/white-mask.png" class="photo__mask-image">
+  <div class="photo__details" (click)="previewDocument(picture)">
+    <p class="photo__details--name" (click)="previewDocument(picture)">{{picture.file_description}}</p>
+    <p class="photo__details--date">{{picture.create_date | date}}</p>
+    <p class="text-right photo__icons">
+      <a class="photo__actions" (click)="downloadPicture($event)">
+        <mg-icon svgName="download" fillColor="white" *ngIf="!showSpinner; else spinner;"></mg-icon>
+        <ng-template #spinner>
+          <mg-spinner size="xsmall" class="actions__spinner"></mg-spinner>
+        </ng-template>
+      </a>
+      <a class="photo__actions photo__actions--delete" (click)="deletePicture($event, picture)">
+          <mg-icon svgName="delete" fillColor="white"></mg-icon>
+      </a>
+    </p>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="loader-wrap">
+    <mg-loader class="loader"></mg-loader>
+    <img src="../assets/img/white-mask.png" class="photo__mask-image">
+  </div>
+</ng-template>

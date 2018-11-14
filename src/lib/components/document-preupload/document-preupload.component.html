@@ -1,0 +1,39 @@
+<div class="preupload">
+    
+    <div class="preupload-container" *ngIf="filePath; else loading">
+      <!-- display image if document type is image -->
+      <div *ngIf="isImage" class="preupload__image-container">
+          <img [src]="filePath" class="preupload__image">
+      </div>
+      <!-- display pdf if document type is pdf -->
+      <div *ngIf="isPdf" class="preupload__pdf">
+        <iframe
+          [src]="filePath"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- display other files on google viewer-->
+      <div *ngIf="isOther" class="preupload__others">
+        <iframe
+          [src]="filePath"
+          height="450"
+          frameborder="0">
+        </iframe>
+      </div>
+    </div>
+
+    <div *ngIf="filePath" class="preupload__file-info">
+      <mg-icon svgName="attachment" fillColor="black" class="preupload__file-icon"></mg-icon>
+      <span>{{ fileUploaded.name }}</span>
+      <span class="preupload__file-remove" data-dz-remove (click)="cancelUpload()">
+        <i class="icon-close"></i>
+      </span>
+    </div>
+
+    <ng-template #loading>
+      <div class="preupload__loader-wrap">
+        <mg-loader class="preupload__loader"></mg-loader>
+      </div>
+    </ng-template>
+  </div>

@@ -1,0 +1,47 @@
+<div class="main">
+  <div class="main__drag-drop">
+    <div class="preview">
+      <div class="preview-container" *ngIf="filePath; else loading">
+        <!-- display image if document type is image -->
+        <div *ngIf="isImage" class="preview__image-container">
+            <img [src]="filePath" class="preview__image">
+        </div>
+        <!-- display pdf if document type is pdf -->
+        <div *ngIf="isPdf" class="preview__pdf">
+          <iframe
+              [src]="filePath"
+              frameborder="0"
+              allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- display other files on google viewer-->
+        <div *ngIf="isOther" class="preview__others">
+          <iframe
+            [src]="filePath"
+            height="450"
+            frameborder="0">
+          </iframe>
+        </div>
+      </div>
+      <ng-template #loading>
+        <div class="preview__loader-wrap">
+          <mg-loader class="preview__loader"></mg-loader>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="main__form">
+      <mg-document-form
+        [modal]="modal"
+        [fileToPreview]="document"
+        [isEditForm]="isEditForm"
+        (uploadDocument)="editDocument($event)"
+        (deleteDocument)="deleteDocument($event)"
+        (download)="downloadDocument($event)"
+        [userSelectOptions]="userSelectOptions"
+        [filePath]="filePath"
+        [projectSelectOptions]="projectSelectOptions">
+      </mg-document-form>
+  </div>
+</div>

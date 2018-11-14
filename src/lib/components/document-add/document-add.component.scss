@@ -1,0 +1,15 @@
+@import "../../../../../../src/styles/global";
+.main {
+  display: flex;
+  &__drag-drop {
+    width: 524px;
+    margin: rem-calc(-16 0 -16 -16);
+    &--hidden{
+      display: none;
+    }
+  }
+  &__form {
+    flex: 1;
+    padding-left: rem-calc(16);
+  }
+}

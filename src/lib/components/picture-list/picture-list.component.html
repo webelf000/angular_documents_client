@@ -1,0 +1,28 @@
+<div class="photos" *ngIf="pictureList.length > 0; else noImages">
+  <div class="photos__list">
+    <div class="photos__list-grid">
+      <ng-container *ngFor="let pic of pictureList | slice: 0:[maxItems]">
+        <mg-picture-list-item
+          [picture]="pic"
+          (docToPreview)="previewDocument($event)"
+          (delete)="openDeleteConfirmModal($event)"
+        ></mg-picture-list-item>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #noImages>
+  <div>
+    <p class="no-images"><i>{{'DOCUMENTS.MAIN.NO_IMAGES' | translate}}</i></p>
+  </div>
+</ng-template>
+<div class="more-pictures">
+  <a *ngIf="moreLink && pictureList?.length > 5" (click)="showMore()">
+    <span  class="more-pictures--load-more">{{'DOCUMENTS.MAIN.LOAD_MORE' | translate}}</span>
+    <span class="icon-arrow-down more-pictures--icon-arrow"></span>
+  </a>
+  <a *ngIf="!moreLink" (click)="showLess()">
+    <span  class="more-pictures--load-more">{{'DOCUMENTS.MAIN.LOAD_LESS' | translate}}</span>
+    <span class="icon-arrow-up more-pictures--icon-arrow"></span>
+  </a>
+</div>

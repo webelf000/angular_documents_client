@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './document-main.component.html',
   styleUrls: ['./document-main.component.scss']
 })
-export class DocumentMainComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DocumentMainComponent implements OnInit, OnDestroy {
   public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
@@ -55,9 +55,6 @@ export class DocumentMainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.store.dispatch(loadDocuments());
     this.coreUserList = this.getCoreUsers();
     this.workflowLevel2List = this.getWorkFlowLevel2();
-  }
-
-  ngAfterViewInit() {
     this.getDocuments();
   }
 
@@ -78,7 +75,7 @@ export class DocumentMainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * @description - open upload document/picture form modal
+   * open upload document/picture form modal
    */
   public openDocumentFormModal() {
     const dialogRef = this.dialog.open(DocumentModalComponent, {
@@ -131,7 +128,7 @@ export class DocumentMainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * @description - Load WorkflowLevel2
+   * Load WorkflowLevel2
    * @return {Observable} - of WorkflowLevel2 Array
    */
   public getWorkFlowLevel2(): Observable<any> {

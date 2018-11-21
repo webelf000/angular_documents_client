@@ -21,6 +21,7 @@ export class ImageLoadingService {
   public loadImage(image: Document, fileType: string = 'image/png', thumbnail: boolean = false) {
     this.httpService.makeRequest('get', thumbnail ? image.thumbnail : image.file, {}, true, fileType).pipe(
       map(response => {
+        console.log(response);
         return URL.createObjectURL(new Blob([response.blob()], {type: fileType}));
       })).subscribe(imageBlob => {
       const document = thumbnail ? {blobThumbnailLocalUrl: imageBlob} : {blobLocalUrl: imageBlob};

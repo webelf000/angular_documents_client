@@ -28,6 +28,7 @@ import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/mo
 import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
 import { DocumentModalComponent } from './components/document-modal/document-modal.component';
 import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
+import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/componen
     ImageLoadingService
   ],
   entryComponents: [
-    DocumentModalComponent
+    DocumentModalComponent,
+    DeleteConfirmationComponent
   ],
   exports: [DocumentMainComponent]
 })

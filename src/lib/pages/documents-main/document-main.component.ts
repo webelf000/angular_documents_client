@@ -160,8 +160,8 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    * @param {object} document - document object to be deleted
    */
   public openDeleteConfirmModal(document) {
-    const message = this.translateService.instant('DOCUMENT.DOCUMENT_MODAL.DELETE_PROMPT');
-    const title = this.translateService.instant('DOCUMENT.DOCUMENT_MODAL.CONFIRM_DELETE');
+    const message = this.translateService.instant('DOCUMENTS.DELETE_MODAL.DELETE_PROMPT');
+    const title = this.translateService.instant('DOCUMENTS.DELETE_MODAL.CONFIRM_DELETE');
     this.dialog.open(DeleteConfirmationComponent, {
       data: {
         deleteAction: 'DELETE_DOCUMENT',

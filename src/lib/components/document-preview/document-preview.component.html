@@ -32,9 +32,9 @@
     </div>
   </div>
   <div class="main__form">
-    {{document}}
       <mg-document-form
         [modal]="modal"
+        [currentWorkflowLevel2]="currentWorkflowLevel2"
         [fileToPreview]="document"
         [isEditForm]="isEditForm"
         (uploadDocument)="editDocument($event)"

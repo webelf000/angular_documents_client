@@ -17,6 +17,7 @@
     [currentWorkflowLevel2]="data.currentWorkflowLevel2 | async"
     [document]="data.document"
     (documentDelete)="openDeleteConfirmModal($event)"
+    (documentEdit)="closeModal()"
   >
   </mg-document-preview>
 

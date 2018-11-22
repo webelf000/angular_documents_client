@@ -17,7 +17,7 @@
   </div>
 </ng-template>
 <div class="more-pictures">
-  <a *ngIf="moreLink && pictureList?.length > 5" (click)="showMore()">
+  <a *ngIf="moreLink && pictureList?.length > maxItems" (click)="showMore()">
     <span  class="more-pictures--load-more">{{'DOCUMENTS.MAIN.LOAD_MORE' | translate}}</span>
     <span class="icon-arrow-down more-pictures--icon-arrow"></span>
   </a>

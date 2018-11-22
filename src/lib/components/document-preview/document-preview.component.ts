@@ -16,6 +16,8 @@ import { ImageLoadingService } from '@libs/documents/src/lib/services/image-load
 import { selectDocument } from '@libs/documents/src/lib/state/documents.selectors';
 import { fileRequestType } from '@libs/documents/src/lib/state/models/fileRequestType.model';
 import { updateDocument } from '@libs/documents/src/lib/state/documents.actions';
+import { MatSnackBar } from '@angular/material';
+import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 
 @Component({
   selector: 'mg-document-preview',
@@ -30,6 +32,7 @@ export class DocumentPreviewComponent implements OnChanges {
   @Input() projectSelectOptions: any[] = [];
   @Input() currentContactUuuid;
   @Output() documentDelete: EventEmitter<any> = new EventEmitter();
+  @Output() documentEdit: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();
 
   public documentSubscription: Subscription;
@@ -44,28 +47,32 @@ export class DocumentPreviewComponent implements OnChanges {
     private sanitizer: DomSanitizer,
     private store: Store<any>,
     private imageLoadingService: ImageLoadingService,
+    private translateService: MidgardTranslateService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const document = changes.document.currentValue;
-    this.filePath = null;
-    if (changes.document && document) {
-      // clean the file type
-      this.isImage = false;
-      this.isPdf = false;
-      this.isOther = false;
-      const fileType = this.fileExtensionHelper.getRequestType(document);
-      if (!document.blobLocalUrl) {
-        if (this.documentSubscription) {
-          this.documentSubscription.unsubscribe();
+    if (changes.document) {
+      const document = changes.document.currentValue;
+      this.filePath = null;
+      if (changes.document && document) {
+        // clean the file type
+        this.isImage = false;
+        this.isPdf = false;
+        this.isOther = false;
+        const fileType = this.fileExtensionHelper.getRequestType(document);
+        if (!document.blobLocalUrl) {
+          if (this.documentSubscription) {
+            this.documentSubscription.unsubscribe();
+          }
+          this.getFileType(fileType);
+          this.subscribeToDoc(this.document);
+          // check if the image was already cached
+          this.imageLoadingService.loadImage(document, fileType);
+        } else {
+          this.getFileType(fileType);
+          this.getDocumentUrl(document.blobLocalUrl);
         }
-        this.getFileType(fileType);
-        this.subscribeToDoc(this.document);
-        // check if the image was already cached
-        this.imageLoadingService.loadImage(document, fileType);
-      } else {
-        this.getFileType(fileType);
-        this.getDocumentUrl(document.blobLocalUrl);
       }
     }
   }
@@ -113,10 +120,14 @@ export class DocumentPreviewComponent implements OnChanges {
    * @param document - document form object
    */
   public editDocument(document) {
+    const message = this.translateService.instant('DOCUMENTS.NOTIFICATIONS.EDIT_SUCCESS');
     if (document) {
       this.store.dispatch(updateDocument(document));
+      this.documentEdit.emit();
+      this.snackBar.open(message, 'Ok', {
+        duration: 2000,
+      });
     }
-    this.modal.next('close');
   }
 
   /**

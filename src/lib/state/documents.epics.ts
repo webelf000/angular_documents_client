@@ -38,7 +38,7 @@ const loadOneDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(LOAD_ONE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('get', `${environment.DOCS_API}/documents/${action.id}/`).pipe(
+      return httpService.makeRequest('get', `${environment.DOCS_API}/documents/${action.id}/`, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => loadOneDocumentCommit(res.data)),
         // If request fails, dispatch failed action
@@ -74,7 +74,7 @@ const updateDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(UPDATE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('put', `${environment.DOCS_API}/documents/${action.data.id}/`, action.data).pipe(
+      return httpService.makeRequest('put', `${environment.DOCS_API}/documents/${action.data.id}/`, action.data, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => updateDocumentCommit(res.data, action.nested)),
         // If request fails, dispatch failed action
@@ -92,7 +92,7 @@ const deleteDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(DELETE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('delete', `${environment.API_URL}/documents/${action.data.id}`).pipe(
+      return httpService.makeRequest('delete', `${environment.API_URL}/documents/${action.data.id}/`, true).pipe(
         // If successful, dispatch success action with result
         map(res => deleteDocumentCommit(action.data, action.nested)),
         // If request fails, dispatch failed action

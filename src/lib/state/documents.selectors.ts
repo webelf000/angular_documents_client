@@ -105,5 +105,5 @@ export const getTime = (date: string) => {
  * @returns {MemoizedSelector<any, any>}
  */
 export const selectDocument = (id: number) => reselect.createSelector(getDocuments, (documents) => {
-  return documents.find( document => document.id.toString() === id.toString());
+  return documents.data.find( document => document.id.toString() === id.toString());
 });

@@ -63,7 +63,8 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    */
   getDocuments() {
     const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
-    this.workflowLevel2Subscription = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id))).subscribe( workflowLevel2 => {
+    this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
+    this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
       if (workflowLevel2) {
         // load pictures
         this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
@@ -79,7 +80,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    * open upload document/picture form modal
    */
   public openDocumentFormModal() {
-    const dialogRef = this.dialog.open(DocumentModalComponent, {
+    this.dialog.open(DocumentModalComponent, {
       data: {
         coreUsers: this.coreUserList,
         workflowLevel2s: this.workflowLevel2List,
@@ -87,16 +88,14 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
         isEdit: false
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {});
-  }
+    }
 
   /**
    * gets the doc to be preview
    * @param {object} document - document form object
    */
   public setPreviwedDoc(document) {
-    const dialogRef = this.dialog.open(DocumentModalComponent, {
+    this.dialog.open(DocumentModalComponent, {
       data: {
         coreUsers: this.coreUserList,
         workflowLevel2s: this.workflowLevel2List,

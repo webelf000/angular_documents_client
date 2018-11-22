@@ -8,6 +8,7 @@ import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store
 import { MatSnackBar } from '@angular/material';
 import { createDocument } from '@libs/documents/src/lib/state/documents.actions';
 import { getDocumentsLoaded } from '@libs/documents/src/lib/state/documents.selectors';
+import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 
 @Component({
   selector: 'mg-document-add',
@@ -39,7 +40,8 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
   constructor(
     private authService: OAuthService,
     private store: Store<any>,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translateService: MidgardTranslateService
   ) {}
 
   ngOnInit() {
@@ -69,6 +71,10 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
       this.createDocumentAdded = this.store.observable.pipe(select(getDocumentsLoaded));
       this.createDocumentSubscription = this.createDocumentAdded.subscribe((uploaded: boolean) => {
         this.documentAdded.emit();
+        const message = this.translateService.instant('DOCUMENTS.NOTIFICATIONS.UPLOAD_SUCCESS');
+        this.snackBar.open(message, 'Ok', {
+          duration: 2000,
+        });
         if (!uploaded) {
           this.clearFile(documentFormObject);
         }

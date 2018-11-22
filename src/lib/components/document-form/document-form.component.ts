@@ -21,7 +21,7 @@ import { FormValidationService } from '@libs/midgard-angular/src/lib/services/fo
   templateUrl: './document-form.component.html',
   styleUrls: ['./document-form.component.scss']
 })
-export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
+export class DocumentFormComponent implements AfterViewInit, OnChanges {
   public documentForm: FormGroup;
   public valueChanged = false;
   public formSubmited = false;
@@ -77,18 +77,10 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
     private fb: FormBuilder,
     private formValidationService: FormValidationService,
     private snackBar: MatSnackBar
-  ) {}
-
-  ngOnInit() {
-    this.documentForm = this.fb.group({
-      workflowlevel2_uuids: [],
-      file_name: [this.documentObject.file_name || '', Validators.required],
-      file_description: [this.documentObject.file_description || '', Validators.required],
-      user_uuid: [this.documentObject.user_uuid || '', Validators.required],
-      create_date: [this.documentObject.create_date ? this.documentObject.create_date : new Date(), Validators.required],
-      file: [{}]
-    });
+  ) {
+    this.initForm(this.documentObject);
   }
+
   ngAfterViewInit() {
     if (this.selectedOauthUser) {
       this.documentObject.user_uuid = this.selectedOauthUser.value;
@@ -98,7 +90,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes) {
     if (changes.fileToUpload && changes.fileToUpload.currentValue) {
       this.autoFillNameAndDate(changes.fileToUpload.currentValue.name);
     }
@@ -108,6 +100,32 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
         this.setFormValues(changes.fileToPreview.currentValue);
       }, 500);
     }
+  }
+
+  /**
+   * @description initialiseForm document form with passed values
+   * @param {object} document - document
+   */
+  private initForm (document) {
+    this.documentForm = this.fb.group({
+      workflowlevel2_uuids: [],
+      file_name: [document.file_name || '', Validators.required],
+      file_description: [document.file_description || '', Validators.required],
+      user_uuid: [document.user_uuid || '', Validators.required],
+      create_date: [document.create_date ? document.create_date : new Date(), Validators.required],
+      file: [{}]
+    });
+  }
+
+  /**
+   * @description Autofill Name Field and date on image select/drag
+   * @param {object} file - the uploaded image name
+   */
+  public autoFillNameAndDate(file) {
+    this.documentForm.patchValue({
+      file_name: file,
+      file_description: file
+    });
   }
 
   /**
@@ -122,17 +140,6 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
       user_uuid: document.user_uuid,
       create_date: document.create_date ? document.create_date : new Date(),
       file: [{}]
-    });
-  }
-
-  /**
-   * @description Autofill Name Field and date on image select/drag
-   * @param {object} file - the uploaded image name
-   */
-  public autoFillNameAndDate(file) {
-    this.documentForm.patchValue({
-      file_name: file,
-      file_description: file
     });
   }
 
@@ -162,6 +169,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges, OnInit {
       this.formSubmited = true;
 
       if (this.documentForm.valid) {
+        // add current workflowlevel2 to the document workflowlevel2_uuids array
         if (this.documentObject.workflowlevel2_uuids.length > 0) {
           document.workflowlevel2_uuids = document.workflowlevel2_uuids.push(this.currentWorkflowLevel2.level2_uuid);
         } else {

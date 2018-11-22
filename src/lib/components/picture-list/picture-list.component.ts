@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { deleteDocument } from '@libs/documents/src/lib/state/documents.actions';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { MatDialog } from '@angular/material';

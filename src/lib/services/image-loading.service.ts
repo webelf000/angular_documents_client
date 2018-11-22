@@ -19,20 +19,19 @@ export class ImageLoadingService {
    * @param {boolean} thumbnail - defines if the file or thumbnail will be used
    */
   public loadImage(image: Document, fileType: string = 'image/png', thumbnail: boolean = false) {
-    this.httpService.makeRequest('get', thumbnail ? image.thumbnail : image.file, {}, true, fileType).pipe(
+    this.httpService.makeRequest('get', thumbnail ? image.thumbnail : image.file, {}, true, fileType, 'blob').pipe(
       map(response => {
-        console.log(response);
-        return URL.createObjectURL(new Blob([response.blob()], {type: fileType}));
+        return URL.createObjectURL(new Blob([response.data], {type: fileType}));
       })).subscribe(imageBlob => {
-      const document = thumbnail ? {blobThumbnailLocalUrl: imageBlob} : {blobLocalUrl: imageBlob};
+      const document = thumbnail ? {...image, blobThumbnailLocalUrl: imageBlob} : {...image, blobLocalUrl: imageBlob};
       this.store.dispatch(saveBlobUrl(document));
     });
   }
 
   public loadDocumentRequest(doc: Document, fileType: string = 'image/png'): Observable<any> {
-    return  this.httpService.makeRequest('get', doc.file, {}, true, fileType).pipe(
+    return  this.httpService.makeRequest('get', doc.file, {}, true, fileType, 'blob').pipe(
       map(response => {
-        return URL.createObjectURL(new Blob([response.blob()], {type: fileType}));
+        return URL.createObjectURL(new Blob([response.data], {type: fileType}));
       })
     );
   }

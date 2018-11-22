@@ -7,6 +7,7 @@ import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
 import {
+  getAllDocuments,
   getDocumentsLoaded,
   selectProjectDocuments,
   selectProjectPictures
@@ -31,7 +32,6 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
   public workflowLevel2Subscription: Subscription;
-  public oauthUser$: Observable<any>;
   public pictureList: Observable<any>;
   public documentList: Observable<any>;
   // public projects = [];
@@ -47,15 +47,15 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.coreUserList = this.getCoreUsers();
+    this.workflowLevel2List = this.getWorkFlowLevel2();
+    this.getDocuments();
     /**
      * dispatch LOAD actions
      */
     this.store.dispatch(loadWorkflowLevel2());
     this.store.dispatch(loadCoreuserData());
     this.store.dispatch(loadDocuments());
-    this.coreUserList = this.getCoreUsers();
-    this.workflowLevel2List = this.getWorkFlowLevel2();
-    this.getDocuments();
   }
 
   /**
@@ -63,14 +63,15 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    */
   getDocuments() {
     const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
-    this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
-    this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
-      // load pictures
-      this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
-      // load documents(pdfs)
-      this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLevel2.level2_uuid)));
-      // check if the documents are loaded
-      this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+    this.workflowLevel2Subscription = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id))).subscribe( workflowLevel2 => {
+      if (workflowLevel2) {
+        // load pictures
+        this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
+        // load documents(pdfs)
+        this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLevel2.level2_uuid)));
+        // check if the documents are loaded
+        this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+      }
     });
   }
 

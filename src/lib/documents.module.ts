@@ -35,7 +35,6 @@ import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/compo
     CommonModule,
     DocumentsRoutingModule,
     MidgardSharedTranslationModule,
-    MidgardStoreModule,
     MidgardModule,
     MatSnackBarModule,
     MatDialogModule,

@@ -1,43 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { StoreModule, Store } from '@ngrx/store';
-import { reducers } from '@mg/shared/reducers';
-import { HttpService } from '@mg/shared/services/http.service';
-
 import { PictureListComponent } from './picture-list.component';
-import { FileExtensionHelper } from '@mg/shared/helpers/file-extension.helper';
-import { FlashMessageService } from '@mg/shared/services/flash-message.service';
-import { TranslateStubService } from 'testing/external.stubs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { GlobalFilterService } from '@mg/shared/services/globalFilter.service';
-import { GlobalFilterStubService } from '../../../../../testing/services.stubs';
-import { TolaUserActions } from '@mg/shared/actions/tolaUser.actions';
-import {
-  FlashMessageStubService,
-  HttpStubService
-} from 'testing/services.stubs';
+import { MatDialogStub, MatSnackBarStub, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
+import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
+import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
+import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
+import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
 
 describe('PictureListComponent', () => {
   let component: PictureListComponent;
   let fixture: ComponentFixture<PictureListComponent>;
-  let store;
+  let store: Store<any>;
   let httpService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PictureListComponent ],
-      imports: [TranslateModule.forRoot(), StoreModule.forRoot(reducers)],
+      imports: [MidgardTranslationTestModule, MidgardStoreModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         FileExtensionHelper,
-        {
-          provide: HttpService,
-          useClass: HttpStubService
-        },
-        { provide: FlashMessageService, useClass: FlashMessageStubService },
-        { provide: TranslateService, useClass: TranslateStubService },
-        { provide: GlobalFilterService, useClass: GlobalFilterStubService },
-        TolaUserActions
+        { provide: HttpService, useClass: StubService },
+        { provide: MatSnackBar, useClass: MatSnackBarStub },
+        { provide: MatDialog, useClass: MatDialogStub},
       ]
     })
     .compileComponents();

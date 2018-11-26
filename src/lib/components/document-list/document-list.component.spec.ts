@@ -1,18 +1,14 @@
-import { reducers } from 'app/shared/reducers/index';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
-
-import { StoreModule } from '@ngrx/store';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { DocumentListComponent } from './document-list.component';
-import { reducer } from '../../state/reducers/documents.reducer';
-import {FileSavingService} from '@mg/shared/services/file-saving.service';
-import {FileSavingStubService} from '../../../../../testing/services.stubs';
 // import {TableMockComponent} from '../../../../../testing/mock.data';
-import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
+import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
+import { FileSavingStubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { of } from 'rxjs';
 
 describe('DocumentListComponent', () => {
   let component: DocumentListComponent;
@@ -46,9 +42,8 @@ describe('DocumentListComponent', () => {
         TableMockComponent
       ],
       imports: [
-        NgxDatatableModule,
         TranslateModule.forRoot(),
-        StoreModule.forRoot(reducer)
+        MidgardStoreModule.forRoot()
       ],
       providers: [
         {provide: FileSavingService, useClass: FileSavingStubService}
@@ -79,7 +74,7 @@ describe('DocumentListComponent', () => {
     const doc = {
       index: 2
     };
-    spyOn(fileSaving, 'downloadDocument').and.returnValue(Observable.of(true));
+    spyOn(fileSaving, 'downloadDocument').and.returnValue(of(true));
     spyOn(table, 'stopDownloadSpinner').and.callThrough();
     component.downloadDocument(doc);
     expect(table.stopDownloadSpinner).toHaveBeenCalledWith(doc.index);

@@ -1,41 +1,33 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { Store, StoreModule} from '@ngrx/store';
-import { AppState } from '@mg/shared/interfaces/appstate';
-import { CreateDocument } from './../../state/actions/documents.actions';
-import { DocumentPreuploadComponent } from './../document-preupload/document-preupload.component';
 import { DocumentAddComponent } from './document-add.component';
-import { AuthService } from '@mg/shared/services/auth.service';
-import {
-  AuthStubService,
-  FormValidationStubService,
-  FlashMessageStubService
-} from 'testing/services.stubs';
-import { FormValidationService } from '@mg/shared/services/form-validator.service';
-import { FlashMessageService } from '@mg/shared/services/flash-message.service';
-import { reducer } from '@mg/modules/documents/state/reducers/documents.reducer';
-import { documentCreateMock } from '../../../../../testing/mock.data';
-import { Observable } from 'rxjs';
-import { DocumentFormComponent } from '@mg/modules/documents/components/document-form/document-form.component';
+import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { MatSnackBarStub, OAuthStubService, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { OAuthService } from '@libs/midgard-angular/src/lib/modules/oauth/oauth.service';
+import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
+import { MatSnackBar } from '@angular/material';
+import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
+import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
+import { of } from 'rxjs';
+import { createDocument } from '@libs/documents/src/lib/state/documents.actions';
+import { documentCreateMock } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
 
 describe('DocumentAddComponent', () => {
   let component: DocumentAddComponent;
   let fixture: ComponentFixture<DocumentAddComponent>;
-  let store: Store<AppState>;
+  let store: Store<any>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DocumentAddComponent, DocumentFormComponent, DocumentPreuploadComponent],
+      declarations: [DocumentAddComponent],
       providers: [
         FormBuilder,
-        { provide: AuthService, useClass: AuthStubService },
-        { provide: FormValidationService, useClass: FormValidationStubService },
-        { provide: FlashMessageService, useClass: FlashMessageStubService }
+        { provide: OAuthService, useClass: OAuthStubService },
+        { provide: HttpService, useClass: StubService },
+        { provide: MatSnackBar, useClass: MatSnackBarStub },
       ],
-      imports: [TranslateModule.forRoot(), FormsModule, ReactiveFormsModule, StoreModule.forRoot(reducer)],
+      imports: [FormsModule, ReactiveFormsModule, MidgardStoreModule.forRoot(), MidgardTranslationTestModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -53,20 +45,11 @@ describe('DocumentAddComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should recognize a DocumentFormComponent', async(() => {
-    fixture.detectChanges();
-    const documentForm: DocumentFormComponent = fixture.componentInstance.documentForm;
-    expect(documentForm).toBeDefined();
-  }));
-
   it('should dispatch create action with form data on form submit and close modal', () => {
-    spyOn(component.modal, 'next').and.callThrough();
-    spyOn(store, 'pipe').and.returnValue(Observable.of(false));
-    const action = new CreateDocument( documentCreateMock );
+    spyOn(store.observable, 'pipe').and.returnValue(of(false));
     // stub store, spy on store.
     component.fileData = 'img/png:5637818gsbsbjsjjs';
     component.onFormSubmit(documentCreateMock);
-    expect(store.dispatch).toHaveBeenCalledWith(action);
-    expect(component.modal.next).toHaveBeenCalledWith('close');
+    expect(store.dispatch).toHaveBeenCalledWith(createDocument(documentCreateMock));
   });
 });

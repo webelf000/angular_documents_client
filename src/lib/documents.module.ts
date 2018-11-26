@@ -25,7 +25,6 @@ import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extens
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
 import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
 import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
 import { DocumentModalComponent } from './components/document-modal/document-modal.component';
 import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';

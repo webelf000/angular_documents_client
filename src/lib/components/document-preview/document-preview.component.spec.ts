@@ -2,20 +2,21 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DocumentPreviewComponent } from './document-preview.component';
-import { FileExtensionHelper } from '@mg/shared/helpers/file-extension.helper';
-import { Store, StoreModule} from '@ngrx/store';
-import { reducer } from '@mg/modules/documents/state/reducers/documents.reducer';
-import { ImageLoadingStubService } from '../../../../../testing/services.stubs';
-import { ImageLoadingService } from '@mg/shared/services/image-loading.service';
-import { AppState } from '@mg/shared/interfaces/appstate';
-import { documentsMock } from '../../../../../testing/mock.data';
-import { of } from 'rxjs/observable/of';
-import { EditDocument } from '@mg/modules/documents/state/actions/documents.actions';
+import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
+import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
+import { MatSnackBarStub, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
+import { documentsMock } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
+import { of } from 'rxjs';
+import { updateDocument } from '@libs/documents/src/lib/state/documents.actions';
+import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
+import { MatSnackBar } from '@angular/material';
 
 describe('DocumentPreviewComponent', () => {
   let component: DocumentPreviewComponent;
   let fixture: ComponentFixture<DocumentPreviewComponent>;
-  let store: Store<AppState>;
+  let store: Store<any>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,9 +24,10 @@ describe('DocumentPreviewComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         FileExtensionHelper,
-        {provide: ImageLoadingService, useClass: ImageLoadingStubService}
+        { provide: ImageLoadingService, useClass: StubService },
+        { provide: MatSnackBar, useClass: MatSnackBarStub },
       ],
-      imports: [StoreModule.forRoot(reducer)]
+      imports: [MidgardStoreModule.forRoot(), MidgardTranslationTestModule]
     }).compileComponents();
   }));
 
@@ -42,7 +44,7 @@ describe('DocumentPreviewComponent', () => {
   });
 
   it('should run subscription and envoke the getDocumentUrl method',  () => {
-    spyOn(store, 'pipe').and.returnValue(of(documentsMock[0]));
+    spyOn(store.observable, 'pipe').and.returnValue(of(documentsMock[0]));
     spyOn(component, 'getDocumentUrl').and.callThrough();
 
     component.subscribeToDoc(documentsMock[0]);
@@ -58,8 +60,7 @@ describe('DocumentPreviewComponent', () => {
   });
 
   it('download should dispatch action with the updated document', () => {
-    const updatedDocument = {id: documentsMock[0].id, changes: documentsMock[0]};
-    const action = new EditDocument(updatedDocument);
+    const action = updateDocument(documentsMock[0]);
     component.editDocument(documentsMock[0]);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });

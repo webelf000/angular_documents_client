@@ -1,19 +1,15 @@
-import { AuthService } from '@mg/shared/services/auth.service';
 import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
-
 import { TranslateModule } from '@ngx-translate/core';
 import { DocumentFormComponent } from './document-form.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  AuthStubService,
-  FormValidationStubService,
-  FlashMessageStubService
-} from '../../../../../testing/services.stubs';
-import { FormValidationService } from '@mg/shared/services/form-validator.service';
-import { FlashMessageService } from '@mg/shared/services/flash-message.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Document } from '../../state/models/document.model';
 import * as moment from 'moment';
+import { MatSnackBarStub, OAuthStubService, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { OAuthService } from '@libs/midgard-angular/src/lib/modules/oauth/oauth.service';
+import { FormValidationService } from '@libs/midgard-angular/src/lib/services/form-validator.service';
+import { MatSnackBar } from '@angular/material';
+import { mockProjects } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
 
 describe('DocumentFormComponent', () => {
   let component: DocumentFormComponent;
@@ -36,9 +32,9 @@ describe('DocumentFormComponent', () => {
       declarations: [DocumentFormComponent],
       providers: [
         FormBuilder,
-        { provide: AuthService, useClass: AuthStubService },
-        { provide: FormValidationService, useClass: FormValidationStubService },
-        { provide: FlashMessageService, useClass: FlashMessageStubService }
+        { provide: OAuthService, useClass: OAuthStubService },
+        { provide: FormValidationService, useClass: StubService },
+        { provide: MatSnackBar, useClass: MatSnackBarStub },
       ],
       imports: [FormsModule, ReactiveFormsModule, TranslateModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA]
@@ -49,6 +45,7 @@ describe('DocumentFormComponent', () => {
     fixture = TestBed.createComponent(DocumentFormComponent);
     component = fixture.componentInstance;
     component.documentObject = documentObjectMock;
+    component.currentWorkflowLevel2 = mockProjects[0];
     fixture.detectChanges();
   });
 

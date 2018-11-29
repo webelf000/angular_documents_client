@@ -45,7 +45,7 @@
     height: 100%;
     background-color: rgba($black, .67);
     line-height: rem-calc(10);
-    padding: rem-calc(15 20 10 10);
+    padding: rem-calc(5);
     font-weight: bold;
     top: 50%;
     left: 50%;
@@ -54,6 +54,7 @@
     opacity: 0;
     color: $white;
     transition: opacity .3s;
+    cursor: pointer;
     &--name {
       cursor: pointer;
       font-size: rem-calc(13);

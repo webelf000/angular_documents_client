@@ -1,6 +1,7 @@
 # Documents
 
 This module is supposed to be used in a walhall app and after running midgard schematics with a configuration that includes this module, the module will be cloned under the projects directory
+
 ## Development server
 
 In your walhall application run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

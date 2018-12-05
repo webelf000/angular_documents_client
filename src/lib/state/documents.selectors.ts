@@ -67,7 +67,7 @@ export const selectProjectDocuments = (projectUuid: string) => reselect.createSe
 );
 
 /***
- * @description -  get project names
+ * get project names
  * @param {array} uuids - array of wfl2 uuids
  * @return {string} comma separated names of wfl2
  */
@@ -92,7 +92,7 @@ export const getProjectName = (uuids: string[], projects) => {
 };
 
 /***
- * @description - get time method
+ * get time method
  * @param {string} date - date
  */
 export const getTime = (date: string) => {

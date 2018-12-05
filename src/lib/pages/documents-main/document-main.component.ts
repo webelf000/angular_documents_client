@@ -148,7 +148,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   }
 
   /***
-   * @description - get time method
+   * get time method
    * @param {string} date - date
    */
   private getTime(date) {
@@ -156,7 +156,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @description - open delete confirmation modal & sets the docToDelete to this document
+   * open delete confirmation modal & sets the docToDelete to this document
    * @param {object} document - document object to be deleted
    */
   public openDeleteConfirmModal(document) {

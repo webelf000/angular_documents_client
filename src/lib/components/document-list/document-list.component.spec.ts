@@ -65,7 +65,7 @@ describe('DocumentListComponent', () => {
   });
 
   /**
-   * @description - test download method
+   * test download method
    * @todo - To be updated once the backend structure is known the method
    * implementation is complete
    */
@@ -81,7 +81,7 @@ describe('DocumentListComponent', () => {
   });
 
   /**
-   * @description - test delete method
+   * test delete method
    */
   it('should call the delete method and emit the document', () => {
     expect(component.deleteDocument).toBeDefined();

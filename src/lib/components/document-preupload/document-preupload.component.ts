@@ -33,7 +33,7 @@ export class DocumentPreuploadComponent implements OnChanges {
   }
 
    /**
-   * @description - sanitize document url
+   * sanitize document url
    * @param {string} path - document url
    */
   public getDocumentUrl(path) {
@@ -41,7 +41,7 @@ export class DocumentPreuploadComponent implements OnChanges {
   }
 
    /**
-   * @description - emits event with the file to delete from the preupload
+   * emits event with the file to delete from the preupload
    * @param {object} fileUploaded - file object to delete
    */
   public cancelUpload() {

@@ -25,7 +25,7 @@ export class FileSavingService {
   }
 
   /**
-   * @description - emits document to download to parent
+   * emits document to download to parent
    * @param {object} document - document object from the table row
    */
   public downloadDocument(doc): Observable<boolean> {

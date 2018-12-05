@@ -17,7 +17,7 @@ export class DocumentModalComponent {
   ) {}
 
   /**
-   * @description - open delete confirmation modal & sets the docToDelete to this document
+   * open delete confirmation modal & sets the docToDelete to this document
    * @param {object} document - document object to be deleted
    */
   public openDeleteConfirmModal(document) {

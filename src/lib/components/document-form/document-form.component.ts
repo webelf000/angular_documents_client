@@ -103,7 +103,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description initialiseForm document form with passed values
+   * initialiseForm document form with passed values
    * @param {object} document - document
    */
   private initForm (document) {
@@ -118,7 +118,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description Autofill Name Field and date on image select/drag
+   * Autofill Name Field and date on image select/drag
    * @param {object} file - the uploaded image name
    */
   public autoFillNameAndDate(file) {
@@ -129,7 +129,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description fill document form with passed values
+   * fill document form with passed values
    * @param {object} document - document
    */
   private fillForm(document) {
@@ -144,7 +144,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description - patch form values for preview
+   * patch form values for preview
    * @param {object} document - document to preview
    */
   private setFormValues(document) {
@@ -160,7 +160,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description - Upload Document
+   * Upload Document
    * @param {object} document - document form object
    */
   public onFormSubmit(document) {
@@ -215,8 +215,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description - emit document to be deleted to parent
-   *  reset form on document form modal close
+   *  emit document to be deleted to parent
    */
   public documentDelete() {
     if (this.fileToPreview) {
@@ -225,7 +224,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   * @description - reset form with default object
+   * reset form with default object
    */
   public resetForm() {
     this.formSubmited = false;
@@ -234,7 +233,7 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
 
 
   /**
-   * @description - check if a date has been selected
+   * check if a date has been selected
    * @param {boolean} event - emitted from date-picker component
    */
   public onDateChanges(): void {

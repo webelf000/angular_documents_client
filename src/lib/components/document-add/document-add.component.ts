@@ -94,7 +94,7 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @description - set the uploaded file name
+   * set the uploaded file name
    * @param {object} file - file object
    */
   public setFileName(file) {

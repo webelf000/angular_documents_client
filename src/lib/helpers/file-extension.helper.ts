@@ -41,7 +41,7 @@ export class FileExtensionHelper {
   }
 
   /**
-   * @description returning requestType depending on the document.file_type
+   * returning requestType depending on the document.file_type
    * @param {Document} document
    * @returns {any} requestType
    */

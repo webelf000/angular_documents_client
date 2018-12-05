@@ -78,7 +78,7 @@ export class DocumentPreviewComponent implements OnChanges {
   }
 
   /**
-   * @description subscribing the the document and running a getDocumentUrl if blob exists
+   * subscribing the the document and running a getDocumentUrl if blob exists
    * @param document
    */
   subscribeToDoc(document) {
@@ -108,7 +108,7 @@ export class DocumentPreviewComponent implements OnChanges {
   }
 
   /**
-   * @description - sanitize document url
+   * sanitize document url
    * @param {string} path - document url
    */
   public getDocumentUrl(path) {
@@ -116,7 +116,7 @@ export class DocumentPreviewComponent implements OnChanges {
   }
 
   /**
-   * @description - edit document
+   * edit document
    * @param document - document form object
    */
   public editDocument(document) {
@@ -131,7 +131,7 @@ export class DocumentPreviewComponent implements OnChanges {
   }
 
   /**
-   * @description - delete document:- emits document to delete
+   * delete document:- emits document to delete
    * @param {object} document - document object
    */
   public deleteDocument(document) {
@@ -141,7 +141,7 @@ export class DocumentPreviewComponent implements OnChanges {
   }
 
   /**
-   * @description - download document:- emits document to download to parent
+   * download document:- emits document to download to parent
    * @param {object} document - document object
    */
   public downloadDocument(document) {

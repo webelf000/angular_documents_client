@@ -66,7 +66,7 @@ export class DocumentListComponent implements OnInit {
   }
 
   /**
-   * @description - emits document to download to parent
+   * emits document to download to parent
    * @param {object} document - document object from the table row
    */
   public downloadDocument(row) {
@@ -77,7 +77,7 @@ export class DocumentListComponent implements OnInit {
   }
 
   /**
-   * @description - emits document to delete to parent
+   * emits document to delete to parent
    * @param {row} document - document object from the table row
    */
   public deleteDocument(row: TableEmitObject) {

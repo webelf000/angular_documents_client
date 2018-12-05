@@ -44,21 +44,21 @@ export class PictureListComponent implements OnInit {
   }
 
   /**
-   *@description - display the rest of the images
+   * display the rest of the images
    */
   public showMore() {
     this.maxItems = this.pictureList.length;
     this.moreLink = false;
   }
   /**
-   *@description - display the rest of the images
+   * display the rest of the images
    */
   public showLess() {
     this.maxItems = 5;
     this.moreLink = true;
   }
   /**
-   * @description - open delete confirmation modal & sets the docToDelete to this document
+   * open delete confirmation modal & sets the docToDelete to this document
    * @param {object} document - document object to be deleted
    */
   public openDeleteConfirmModal(document) {

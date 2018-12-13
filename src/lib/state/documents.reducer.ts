@@ -8,7 +8,10 @@ import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
 
 const initialState = {
   data: [],
-  dataLoaded: false
+  loaded: false,
+  created: false,
+  updated: false,
+  deleted: false
 };
 
 export function documentsReducer(state = initialState, action: Action) {

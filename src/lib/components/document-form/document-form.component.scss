@@ -22,3 +22,15 @@
     cursor: pointer;
     color: $dark-blue-darker;
   }
+
+.documents-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &__field {
+    margin-bottom: rem-calc(15);
+    &--full-width {
+      width: 100%;
+    }
+  }
+}

@@ -3,16 +3,6 @@
 :host{
   width: 50%;
   padding: rem-calc(8 4 0 4);
-  @include media-breakpoint-up(sm) {
-    width: 33.33%;
-  }
-  @include media-breakpoint-up(md) {
-    width: 25%;
-  }
-  @include media-breakpoint-up(lg) {
-    width: 20%;
-  }
-
 }
 .loader-wrap{
   position: relative;

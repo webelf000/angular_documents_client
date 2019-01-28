@@ -1,12 +1,6 @@
-<mg-ui-top-bar>
-  <mg-ui-top-bar-actions>
-    <mg-button buttonStyle="neutral" (click)="openDocumentFormModal()">
-      <i class="icon-upload mr-1"></i> <span>{{'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate}}</span>
-    </mg-button>
-  </mg-ui-top-bar-actions>
-</mg-ui-top-bar>
-<div class="row">
-  <div class="pictures col-md-9" *ngIf="documentsLoaded && pictureList && documentList;">
+<fj-button (click)="openDocumentFormModal()" [icon]="'plus'">{{'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate}}</fj-button>
+<div>
+  <div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
     <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
     <ng-template #showPictures>
       <mg-ui-card>
@@ -29,3 +23,14 @@
   </div>
 </div>
 
+<fj-modal #documentUploadModal [size]="'big'" [customStyles]="{padding: '0px'}">
+  <div modal-content style="width: 100%">
+    <mg-document-add
+      [userSelectOptions]="coreUserList | async"
+      [projectSelectOptions]="workflowLevel2List | async"
+      [currentWorkflowLevel2]="currentWorkflowLevel2 | async"
+      (documentAdded)= "closeModal()"
+    >
+    </mg-document-add>
+  </div>
+</fj-modal>

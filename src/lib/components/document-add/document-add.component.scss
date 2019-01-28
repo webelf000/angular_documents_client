@@ -2,14 +2,13 @@
 .main {
   display: flex;
   &__drag-drop {
-    width: 524px;
-    margin: rem-calc(-16 0 -16 -16);
+    flex: 1;
     &--hidden{
       display: none;
     }
   }
   &__form {
     flex: 1;
-    padding-left: rem-calc(16);
+    padding: rem-calc(25);
   }
 }

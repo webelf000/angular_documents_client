@@ -43,15 +43,6 @@
     margin: rem-calc(8 4 0 4);
     background-size: cover;
     background-position: center;
-    @include media-breakpoint-up(sm) {
-      width: calc(33.33% - 0.5rem);
-    }
-    @include media-breakpoint-up(md) {
-      width: calc(25% - 0.5rem);
-    }
-    @include media-breakpoint-up(lg) {
-      width: calc(20% - 0.5rem);
-    }
   }
   &__mask-image{
     width: 100%;

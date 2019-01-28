@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
@@ -20,6 +20,7 @@ import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/t
 import { ActivatedRoute } from '@angular/router';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 import { Subscription } from 'rxjs';
+import { ModalComponent } from '@libs/freyja-ui/src/lib/modal/modal.component';
 
 
 @Component({
@@ -28,6 +29,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./document-main.component.scss']
 })
 export class DocumentMainComponent implements OnInit, OnDestroy {
+  @ViewChild('documentUploadModal') documentUploadModal: ModalComponent;
+
   public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
@@ -80,15 +83,23 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    * open upload document/picture form modal
    */
   public openDocumentFormModal() {
-    this.dialog.open(DocumentModalComponent, {
-      data: {
-        coreUsers: this.coreUserList,
-        workflowLevel2s: this.workflowLevel2List,
-        currentWorkflowLevel2: this.currentWorkflowLevel2,
-        isEdit: false
-      }
-    });
+    this.documentUploadModal.showModal = true;
+    // this.dialog.open(DocumentModalComponent, {
+    //   data: {
+    //     coreUsers: this.coreUserList,
+    //     workflowLevel2s: this.workflowLevel2List,
+    //     currentWorkflowLevel2: this.currentWorkflowLevel2,
+    //     isEdit: false
+    //   }
+    // });
     }
+
+  /**
+   * closes upload document/picture form modal
+   */
+  public closeModal() {
+    this.documentUploadModal.showModal = false;
+  }
 
   /**
    * gets the doc to be preview

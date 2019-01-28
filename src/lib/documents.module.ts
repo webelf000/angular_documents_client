@@ -3,7 +3,6 @@ import { DocumentMainComponent } from './pages/documents-main/document-main.comp
 import { DocumentsRoutingModule } from '@libs/documents/src/lib/documents-routing.module';
 import { MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { MidgardModule } from '@libs/midgard-angular/src/lib/midgard.module';
-import { ButtonModule } from '@libs/midgard-angular/src/lib/components/button/button.module';
 import { TopBarModule } from '@libs/midgard-angular/src/lib/components/top-bar-actions/top-bar.module';
 import { MgSpinnerModule } from '@libs/midgard-angular/src/lib/components/spinner/spinner.module';
 import { PictureListItemComponent } from '@libs/documents/src/lib/components/picture-list/picture-list-item/picture-list-item.component';
@@ -28,6 +27,11 @@ import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/mo
 import { DocumentModalComponent } from './components/document-modal/document-modal.component';
 import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
+import {FjButtonModule} from '@libs/freyja-ui/src/lib/button/button.module';
+import {FjModalModule} from '@libs/freyja-ui/src/lib/modal/modal.module';
+import {FjTextInputModule} from '@libs/freyja-ui/src/lib/text-input/text-input.module';
+import {FjDatePickerModule} from '@libs/freyja-ui/src/lib/date-picker/date-picker.module';
+import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/native-dropdown.module';
 
 @NgModule({
   imports: [
@@ -37,7 +41,6 @@ import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/compo
     MidgardModule,
     MatSnackBarModule,
     MatDialogModule,
-    ButtonModule,
     TopBarModule,
     MgSpinnerModule,
     DeleteConfirmationModule,
@@ -46,7 +49,12 @@ import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/compo
     LoaderModule,
     IconModule,
     CardModule,
-    GridFormsModule
+    GridFormsModule,
+    FjButtonModule,
+    FjModalModule,
+    FjTextInputModule,
+    FjDatePickerModule,
+    FjNativeDropdownModule
   ],
   declarations: [
     DocumentMainComponent,

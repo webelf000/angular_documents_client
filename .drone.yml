@@ -11,7 +11,6 @@ pipeline:
     secrets: [NPM_USER, NPM_PASS, NPM_EMAIL, NPM_TOKEN]
     when:
       event: [push, tag]
-
    build-docs:
     image: node:9.9.0
     commands:
@@ -19,7 +18,6 @@ pipeline:
     when:
       event: [push, tag]
       status: [success]
-
    deploy-docs:
     image: node:9.9.0
     commands:
@@ -33,10 +31,10 @@ pipeline:
       - git config --global user.email "$${NPM_EMAIL}"
       - git config --global user.name "$${NPM_USER}"
       - git clone git@github.com:Humanitec/StandardizationDocs.git
-      - cd StandardizationDocs/LogicModules/Frontend-Service/products/
+      - cd StandardizationDocs/LogicModules/Frontend-Service/documents/
       - cp ../../../../documentation/ ./ -r
       - git add .
-      - git commit -m "Updated documentation for products service"
+      - git commit -m "Updated documentation for documents service"
       - git push origin master
     secrets: [NPM_USER, NPM_EMAIL, SSH_KEY, SSH_PUBLIC_KEY]
     when:

@@ -12,7 +12,7 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-docs:
+   build-docs:
     image: node:9.9.0
     commands:
       - npx compodoc -p tsconfig.lib.json
@@ -20,7 +20,7 @@ pipeline:
       event: [push, tag]
       status: [success]
 
-  deploy-docs:
+   deploy-docs:
     image: node:9.9.0
     commands:
       - eval "$(ssh-agent -s)"
@@ -33,11 +33,10 @@ pipeline:
       - git config --global user.email "$${NPM_EMAIL}"
       - git config --global user.name "$${NPM_USER}"
       - git clone git@github.com:Humanitec/StandardizationDocs.git
-      - mkdir StandardizationDocs/LogicModules/Frontend-Service/documents/
-      - cd StandardizationDocs/LogicModules/Frontend-Service/documents/
+      - cd StandardizationDocs/LogicModules/Frontend-Service/products/
       - cp ../../../../documentation/ ./ -r
       - git add .
-      - git commit -m "Updated documentation for documents service"
+      - git commit -m "Updated documentation for products service"
       - git push origin master
     secrets: [NPM_USER, NPM_EMAIL, SSH_KEY, SSH_PUBLIC_KEY]
     when:

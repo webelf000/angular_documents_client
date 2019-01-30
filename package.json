@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@ngx-translate/core": "^11.0.0",
+    "freyja-ui": "0.0.15",
     "moment": "^2.22.2",
-    "rxjs": "^6.3.3",
-    "freyja-ui": "0.0.15"
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.7"

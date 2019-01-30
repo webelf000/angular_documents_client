@@ -25,13 +25,13 @@ import { ImageLoadingService } from '@libs/documents/src/lib/services/image-load
 import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
 import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
-import {FjButtonModule} from '@libs/freyja-ui/src/lib/button/button.module';
-import {FjModalModule} from '@libs/freyja-ui/src/lib/modal/modal.module';
-import {FjTextInputModule} from '@libs/freyja-ui/src/lib/text-input/text-input.module';
-import {FjDatePickerModule} from '@libs/freyja-ui/src/lib/date-picker/date-picker.module';
-import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/native-dropdown.module';
-import {FjDragAndDropModule} from '@libs/freyja-ui/src/lib/drag-and-drop/drag-and-drop.module';
-import {IconModule} from '@libs/freyja-ui/src/lib/icon/icon.module';
+import {FjButtonModule} from 'freyja-ui';
+import {FjModalModule} from 'freyja-ui';
+import {FjTextInputModule} from 'freyja-ui';
+import {FjDatePickerModule} from 'freyja-ui';
+import {FjNativeDropdownModule} from 'freyja-ui';
+import {FjDragAndDropModule} from 'freyja-ui';
+import {IconModule} from 'freyja-ui';
 
 @NgModule({
   imports: [

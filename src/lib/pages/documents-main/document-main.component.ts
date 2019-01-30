@@ -13,14 +13,13 @@ import {
   selectProjectPictures
 } from '@libs/documents/src/lib/state/documents.selectors';
 import { loadDocuments } from '@libs/documents/src/lib/state/documents.actions';
-import { DocumentModalComponent } from '@libs/documents/src/lib/components/document-modal/document-modal.component';
 import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
 import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.selectors';
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 import { Subscription } from 'rxjs';
-import { ModalComponent } from '@libs/freyja-ui/src/lib/modal/modal.component';
+import { ModalComponent } from 'freyja-ui';
 
 
 @Component({

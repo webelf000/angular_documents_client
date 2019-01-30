@@ -9,7 +9,6 @@ import {
 } from './documents.actions';
 import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
 import { reduxObservable } from '@libs/midgard-angular/src/lib/modules/store';
-import {FileSavingService} from '@libs/documents/src/lib/services/file-saving.service';
 
 const httpService = new HttpService();
 
@@ -95,9 +94,9 @@ const deleteDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(DELETE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('delete', `${environment.API_URL}documents/documents/${action.data.id}/`, true).pipe(
+      return httpService.makeRequest('delete', `${environment.API_URL}documents/documents/${action.data.id}/`, {}, true).pipe(
         // If successful, dispatch success action with result
-        map(res => deleteDocumentCommit(action.data, action.nested)),
+        map(res => deleteDocumentCommit(action.data, null)),
         // If request fails, dispatch failed action
         catchError((error) => of(deleteDocumentFail(error)))
       );

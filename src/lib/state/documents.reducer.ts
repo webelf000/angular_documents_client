@@ -26,7 +26,7 @@ export function documentsReducer(state = initialState, action: Action) {
     case UPDATE_DOCUMENT_COMMIT:
       return upsertOne(state, action);
     case DELETE_DOCUMENT_COMMIT:
-      return {...state, data: { results: state.data.filter (item => item.id !== action.data.id)}, deleted: true};
+      return {...state, data: { results: state.data.results.filter (item => item.id !== action.data.id)}, deleted: true};
     case SAVE_BLOB_URL:
       if (state.data['results']) {
         return {...state, data: { results: state.data['results'].map (item => {

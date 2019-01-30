@@ -9,7 +9,6 @@ import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extens
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
 import { ActivatedRoute } from '@angular/router';
-import { DocumentModalComponent } from '@libs/documents/src/lib/components/document-modal/document-modal.component';
 
 
 describe('DocumentMainComponent', () => {
@@ -41,20 +40,6 @@ describe('DocumentMainComponent', () => {
     store = TestBed.get(Store);
     dialog = TestBed.get(MatDialog);
     fixture.detectChanges();
-  });
-
-  it('should open upload modal', () => {
-    spyOn(dialog, 'open').and.callThrough();
-    const mockConfig = {
-      data: {
-        coreUsers: component.coreUserList,
-        workflowLevel2s: component.workflowLevel2List,
-        currentWorkflowLevel2: component.currentWorkflowLevel2,
-        isEdit: false
-      }
-    }
-    component.openDocumentFormModal();
-    expect(dialog.open).toHaveBeenCalledWith(DocumentModalComponent, mockConfig);
   });
 });
 

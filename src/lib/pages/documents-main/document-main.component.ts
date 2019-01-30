@@ -35,7 +35,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
   public currentDocument: any;
-  public workflowLevel2Subscription: Subscription;
+  public workflowLevel2Subscription: any;
   public pictureList: Observable<any>;
   public documentList: Observable<any>;
   // public projects = [];

@@ -10,7 +10,9 @@ const getDocuments = state => state.documentsReducer;
 export const getAllDocuments = reselect.createSelector(
   getDocuments,
   (documents) => {
-    return documents.data;
+    if (documents.data) {
+      return documents.data;
+    }
   }
 );
 
@@ -18,6 +20,50 @@ export const getDocumentsLoaded = reselect.createSelector(
   getDocuments,
   (documents) => {
     return documents.dataLoaded;
+  }
+);
+
+/**
+ * @returns {MemoizedSelector<AppState, any>} returning all the documents that are pictures
+ */
+export const selectPictures = reselect.createSelector(
+  getAllDocuments,
+  (documents: any) => {
+    if (documents && documents.results) {
+      const pictures = [];
+      documents.results.forEach((element) => {
+        if (element.file_type) {
+          if (helper.getFileType(element.file_type)) {
+            pictures.push(element);
+          }
+        }
+      });
+      pictures.sort((a, b) => {
+        return getTime(b.create_date) - getTime(a.create_date);
+      });
+      return pictures;
+    }
+  }
+);
+
+/**
+ * @returns {MemoizedSelector<AppState, any>} returning the documnets
+ */
+export const selectDocuments = reselect.createSelector(
+  getAllDocuments,
+  (documents: any) => {
+    if (documents && documents.results) {
+      const docs = [];
+      documents.results.forEach((element) => {
+        if (!helper.getFileType(element.file_type)) {
+          docs.push(element);
+        }
+      });
+      docs.sort((a, b) => {
+        return getTime(b.create_date) - getTime(a.create_date);
+      });
+      return docs;
+    }
   }
 );
 /**
@@ -105,5 +151,5 @@ export const getTime = (date: string) => {
  * @returns {MemoizedSelector<any, any>}
  */
 export const selectDocument = (id: number) => reselect.createSelector(getDocuments, (documents) => {
-  return documents.data.find( document => document.id.toString() === id.toString());
+  return documents.data.results.find( document => document.id.toString() === id.toString());
 });

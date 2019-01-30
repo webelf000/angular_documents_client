@@ -18,13 +18,11 @@ import { CommonModule } from '@angular/common';
 import { MgDragAndDropModule } from '@libs/midgard-angular/src/lib/components/drag-and-drop/drag-and-drop.module';
 import { LoaderModule } from '@libs/midgard-angular/src/lib/components/loader/loader.module';
 import { CardModule } from '@libs/midgard-angular/src/lib/components/card/card.module';
-import { IconModule } from '@libs/midgard-angular/src/lib/components/icon/icon.module';
 import { GridFormsModule } from '@libs/midgard-angular/src/lib/components/form-elements/grid-forms/grid-forms.module';
 import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
 import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
 import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
-import { DocumentModalComponent } from './components/document-modal/document-modal.component';
 import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
 import {FjButtonModule} from '@libs/freyja-ui/src/lib/button/button.module';
@@ -32,6 +30,8 @@ import {FjModalModule} from '@libs/freyja-ui/src/lib/modal/modal.module';
 import {FjTextInputModule} from '@libs/freyja-ui/src/lib/text-input/text-input.module';
 import {FjDatePickerModule} from '@libs/freyja-ui/src/lib/date-picker/date-picker.module';
 import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/native-dropdown.module';
+import {FjDragAndDropModule} from '@libs/freyja-ui/src/lib/drag-and-drop/drag-and-drop.module';
+import {IconModule} from '@libs/freyja-ui/src/lib/icon/icon.module';
 
 @NgModule({
   imports: [
@@ -54,7 +54,9 @@ import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/na
     FjModalModule,
     FjTextInputModule,
     FjDatePickerModule,
-    FjNativeDropdownModule
+    FjNativeDropdownModule,
+    FjDragAndDropModule,
+    IconModule
   ],
   declarations: [
     DocumentMainComponent,
@@ -65,8 +67,7 @@ import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/na
     DocumentPreuploadComponent,
     DocumentFormComponent,
     BackgroundImageDirective,
-    PictureListItemComponent,
-    DocumentModalComponent
+    PictureListItemComponent
   ],
   providers: [
     FileExtensionHelper,
@@ -74,7 +75,6 @@ import {FjNativeDropdownModule} from '@libs/freyja-ui/src/lib/native-dropdown/na
     ImageLoadingService
   ],
   entryComponents: [
-    DocumentModalComponent,
     DeleteConfirmationComponent
   ],
   exports: [DocumentMainComponent]

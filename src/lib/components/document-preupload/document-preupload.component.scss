@@ -1,6 +1,6 @@
 @import "../../../../../../src/styles/global";
 .preupload {
-    display: flex;
+    display: inline-table;
     flex-direction: column;
     background-color: $gray-very-light;
     height: 100%;
@@ -33,13 +33,8 @@
         margin-right: rem-calc(7);
     }
     &__file-remove {
-        position: absolute;
-        top: rem-calc(2);
-        right: 0;
-        color: $gray-medium-dark;
-        background-color: $gray-very-light;
-        border-radius: 5px;
-        cursor: pointer;
+      margin-left: rem-calc(5);
+      cursor: pointer;
     }
 
     &__image-container{

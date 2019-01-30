@@ -1,13 +1,13 @@
 <div class="main">
   <div class="main__drag-drop">
 
-    <mg-drag-and-drop
+    <fj-drag-and-drop
       [class.main__drag-drop--hidden]="isFileSelected"
       [removeFile]="removeFile"
       [noFileSelected]="noFileSelected"
       (uploadedDoc)="setFileName($event)"
       (fileToUpload)="setFileData($event)">
-    </mg-drag-and-drop>
+    </fj-drag-and-drop>
 
     <mg-document-preupload
       *ngIf="fileData && isFileSelected"

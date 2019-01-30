@@ -8,7 +8,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
 import {
   getAllDocuments,
-  getDocumentsLoaded,
+  getDocumentsLoaded, selectDocuments, selectPictures,
   selectProjectDocuments,
   selectProjectPictures
 } from '@libs/documents/src/lib/state/documents.selectors';
@@ -30,10 +30,12 @@ import { ModalComponent } from '@libs/freyja-ui/src/lib/modal/modal.component';
 })
 export class DocumentMainComponent implements OnInit, OnDestroy {
   @ViewChild('documentUploadModal') documentUploadModal: ModalComponent;
+  @ViewChild('documentPreviewModal') documentPreviewModal: ModalComponent;
 
   public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
+  public currentDocument: any;
   public workflowLevel2Subscription: Subscription;
   public pictureList: Observable<any>;
   public documentList: Observable<any>;
@@ -66,17 +68,27 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    */
   getDocuments() {
     const workflowLevel2Id = this.activatedRoute.parent.parent.snapshot.paramMap.get('id');
-    this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
-    this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
-      if (workflowLevel2) {
-        // load pictures
-        this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
-        // load documents(pdfs)
-        this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLevel2.level2_uuid)));
-        // check if the documents are loaded
-        this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
-      }
-    });
+    if (workflowLevel2Id) {
+      this.currentWorkflowLevel2 = this.store.observable.pipe(select(selectWorkflowLevel2(workflowLevel2Id)));
+      this.workflowLevel2Subscription = this.currentWorkflowLevel2.subscribe( workflowLevel2 => {
+        if (workflowLevel2) {
+          // load pictures
+          this.pictureList = this.store.observable.pipe(select(selectProjectPictures(workflowLevel2.level2_uuid)));
+          // load documents(pdfs)
+          this.documentList = this.store.observable.pipe(select(selectProjectDocuments(workflowLevel2.level2_uuid)));
+          // check if the documents are loaded
+          this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+        }
+      });
+    } else {
+      // load pictures
+      this.pictureList = this.store.observable.pipe(select(selectPictures));
+      // load documents(pdfs)
+      this.documentList = this.store.observable.pipe(select(selectDocuments));
+      // check if the documents are loaded
+      this.documentsLoaded = this.store.observable.pipe(select(getDocumentsLoaded));
+    }
+
   }
 
   /**
@@ -84,14 +96,6 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    */
   public openDocumentFormModal() {
     this.documentUploadModal.showModal = true;
-    // this.dialog.open(DocumentModalComponent, {
-    //   data: {
-    //     coreUsers: this.coreUserList,
-    //     workflowLevel2s: this.workflowLevel2List,
-    //     currentWorkflowLevel2: this.currentWorkflowLevel2,
-    //     isEdit: false
-    //   }
-    // });
     }
 
   /**
@@ -106,15 +110,8 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
    * @param {object} document - document form object
    */
   public setPreviwedDoc(document) {
-    this.dialog.open(DocumentModalComponent, {
-      data: {
-        coreUsers: this.coreUserList,
-        workflowLevel2s: this.workflowLevel2List,
-        currentWorkflowLevel2: this.currentWorkflowLevel2,
-        isEdit: true,
-        document
-      }
-    });
+    this.currentDocument = document;
+    this.documentPreviewModal.showModal = true;
   }
   //
   /**
@@ -127,7 +124,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
       select(getAllCoreUsers),
       map((users) => {
         const usersOptions: any[] = [];
-        users.forEach((user) => {
+        users.data.forEach((user) => {
           usersOptions.push({
             label: user.name,
             value: user.core_user_uuid
@@ -184,6 +181,8 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.workflowLevel2Subscription.unsubscribe();
+    if (this.workflowLevel2Subscription) {
+      this.workflowLevel2Subscription.unsubscribe();
+    }
   }
 }

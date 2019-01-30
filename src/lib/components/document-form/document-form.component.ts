@@ -134,11 +134,10 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
    */
   private fillForm(document) {
     this.documentForm.patchValue({
-      workflowlevel2_uuids: document.workflowlevel2_uuids,
+      workflowlevel2_uuids: document.workflowlevel2_uuids ? document.workflowlevel2_uuids : [''],
       file_name: document.file_name,
       file_description: document.file_description,
       user_uuid: document.user_uuid,
-      create_date: document.create_date ? document.create_date : new Date(),
       file: [{}]
     });
   }
@@ -149,7 +148,8 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
    */
   private setFormValues(document) {
     this.documentForm.patchValue({
-      workflowlevel2_uuids: document.workflowlevel2_uuids,
+      workflowlevel2_uuids: document.workflowlevel2_uuids ? document.workflowlevel2_uuids : [''],
+      file_name: document.file_name,
       file_description: document.file_description,
       user_uuid: document.user_uuid,
     });
@@ -170,12 +170,13 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
 
       if (this.documentForm.valid) {
         // add current workflowlevel2 to the document workflowlevel2_uuids array
-        if (this.documentObject.workflowlevel2_uuids.length > 0) {
-          document.workflowlevel2_uuids = document.workflowlevel2_uuids.push(this.currentWorkflowLevel2.level2_uuid);
-        } else {
-          document.workflowlevel2_uuids = [this.currentWorkflowLevel2.level2_uuid];
+        if (this.currentWorkflowLevel2) {
+          if (this.documentObject.workflowlevel2_uuids.length > 0) {
+            document.workflowlevel2_uuids = document.workflowlevel2_uuids.push(this.currentWorkflowLevel2.level2_uuid);
+          } else {
+            document.workflowlevel2_uuids = [this.currentWorkflowLevel2.level2_uuid];
+          }
         }
-        document.contact_uuid = this.currentWorkflowLevel2.level2_uuid;
 
         if (this.fileToPreview) {
           if (moment(document.create_date, 'DD.MM.YYYY').isValid()) {
@@ -187,10 +188,10 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
           }
           const editFile = {
             id: this.fileToPreview.id,
+            file_name: document.file_name,
             file_description: document.file_description,
             user_uuid: document.user_uuid,
             workflowlevel2_uuids: document.workflowlevel2_uuids,
-            create_date: document.create_date
           };
           this.uploadDocument.emit(editFile);
           this.valueChanged = false;

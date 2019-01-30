@@ -1,26 +1,31 @@
-<fj-button (click)="openDocumentFormModal()" [icon]="'plus'">{{'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate}}</fj-button>
 <div>
-  <div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
-    <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
-    <ng-template #showPictures>
-      <mg-ui-card>
-        <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>
-        <mg-ui-card-content>
-          <mg-picture-list
-              [pictureList]="pictureList | async"
-              (docToPreview)="setPreviwedDoc($event)"
-              (delete)="openDeleteConfirmModal($event)">
-          </mg-picture-list>
-        </mg-ui-card-content>
-      </mg-ui-card>
-      <mg-document-list
-          [documentList]="documentList | async"
-          [projects] = "workflowLevel2List | async"
-          (docToPreview)="setPreviwedDoc($event)"
-          (delete)="openDeleteConfirmModal($event)">
-        </mg-document-list>
-      </ng-template>
-  </div>
+  <h3>{{'DOCUMENTS.TITLE' | translate}}</h3>
+</div>
+<fj-button (click)="openDocumentFormModal()"
+           [icon]="'plus'"
+           [margin]="'15px 0px'"
+>{{'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate}}
+</fj-button>
+<div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
+  <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
+  <ng-template #showPictures>
+    <mg-ui-card>
+      <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>
+      <mg-ui-card-content>
+        <mg-picture-list
+            [pictureList]="pictureList | async"
+            (docToPreview)="setPreviwedDoc($event)"
+            (delete)="openDeleteConfirmModal($event)">
+        </mg-picture-list>
+      </mg-ui-card-content>
+    </mg-ui-card>
+    <mg-document-list
+        [documentList]="documentList | async"
+        [projects] = "workflowLevel2List | async"
+        (docToPreview)="setPreviwedDoc($event)"
+        (delete)="openDeleteConfirmModal($event)">
+      </mg-document-list>
+    </ng-template>
 </div>
 
 <fj-modal #documentUploadModal [size]="'big'" [customStyles]="{padding: '0px'}">
@@ -32,5 +37,19 @@
       (documentAdded)= "closeModal()"
     >
     </mg-document-add>
+  </div>
+</fj-modal>
+
+<fj-modal #documentPreviewModal [size]="'big'" [customStyles]="{padding: '0px'}">
+  <div modal-content style="width: 100%">
+    <mg-document-preview
+      [userSelectOptions]="coreUserList | async"
+      [projectSelectOptions]="workflowLevel2List | async"
+      [currentWorkflowLevel2]="currentWorkflowLevel2 | async"
+      [document]="currentDocument"
+      (documentDelete)="openDeleteConfirmModal($event)"
+      (documentEdit)="closeModal()"
+    >
+    </mg-document-preview>
   </div>
 </fj-modal>

@@ -5,6 +5,7 @@ import { saveBlobUrl } from '@libs/documents/src/lib/state/documents.actions';
 import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
 import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
 import { Document } from '@libs/documents/src/lib/state/models/document.model';
+import {environment} from '@env/environment';
 
 @Injectable()
 export class ImageLoadingService {
@@ -19,7 +20,7 @@ export class ImageLoadingService {
    * @param {boolean} thumbnail - defines if the file or thumbnail will be used
    */
   public loadImage(image: Document, fileType: string = 'image/png', thumbnail: boolean = false) {
-    this.httpService.makeRequest('get', thumbnail ? image.thumbnail : image.file, {}, true, fileType, 'blob').pipe(
+    this.httpService.makeRequest('get', thumbnail ? `${environment.API_URL}${image.thumbnail}` : `${environment.API_URL}${image.file}`, {}, true, fileType, 'blob').pipe(
       map(response => {
         return URL.createObjectURL(new Blob([response.data], {type: fileType}));
       })).subscribe(imageBlob => {

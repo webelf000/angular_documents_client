@@ -7,13 +7,13 @@
     <p class="photo__details--date">{{picture.create_date | date}}</p>
     <p class="text-right photo__icons">
       <a class="photo__actions" (click)="downloadPicture($event)">
-        <mg-icon svgName="download" fillColor="white" *ngIf="!showSpinner; else spinner;"></mg-icon>
+        <fj-icon svgName="download" fillColor="white" *ngIf="!showSpinner; else spinner;"></fj-icon>
         <ng-template #spinner>
           <mg-spinner size="xsmall" class="actions__spinner"></mg-spinner>
         </ng-template>
       </a>
       <a class="photo__actions photo__actions--delete" (click)="deletePicture($event, picture)">
-          <mg-icon svgName="delete" fillColor="white"></mg-icon>
+          <fj-icon svgName="delete" fillColor="white"></fj-icon>
       </a>
     </p>
   </div>

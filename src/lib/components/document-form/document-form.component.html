@@ -2,43 +2,54 @@
   <div class="documents-form__field documents-form__field--full-width">
     <fj-text-input
       [customStyles]="{'width': '100%'}"
-      [controlName]="'file_description'"
+      [controlName]="'file_name'"
       [formGroup]="documentForm"
       [placeholder]="'File Description'"
-      [error]="formErrors.file_description"
+      [error]="formErrors.file_name"
       [label]="'DOCUMENTS.FORM.DOCUMENT_NAME' | translate"
     >
     </fj-text-input>
   </div>
 
-    <!--<mg-grid-inline-->
-      <!--labelText="{{'DOCUMENTS.FORM.DOCUMENT_NAME' | translate}}"-->
-      <!--controlName="file_description"-->
-      <!--[formGroup]="documentForm"-->
-      <!--[required]="true"-->
-      <!--[errors]="formErrors.file_description"-->
-      <!--[feedback]="formErrors.file_description"-->
-    <!--&gt;-->
+  <div class="documents-form__field documents-form__field--full-width">
+    <fj-text-input
+      [customStyles]="{'width': '100%'}"
+      [controlName]="'file_description'"
+      [formGroup]="documentForm"
+      [placeholder]="'File Name'"
+      [error]="formErrors.file_description"
+      [label]="'DOCUMENTS.FORM.DOCUMENT_DESCRIPTION' | translate"
+    >
+    </fj-text-input>
+  </div>
+
   <div class="documents-form__field documents-form__field--full-width" *ngIf="userSelectOptions">
     <fj-native-dropdown
+      [label]="'User'"
       [width]="'100%'"
+      [formGroup]="documentForm"
+      controlName="user_uuid"
+      [customStyles]="{'width': '100%', 'color': 'black'}"
+      [error]="formErrors.user_uuid"
       [options]="userSelectOptions"
     >
     </fj-native-dropdown>
   </div>
 
-          <!--<mg-select-grid-->
-            <!--*ngIf="userSelectOptions"-->
-            <!--labelText="{{'DOCUMENTS.FORM.ADDED_BY' | translate}}*"-->
-            <!--controlName="user_uuid"-->
-            <!--[formGroup]="documentForm"-->
-            <!--[options]="userSelectOptions"-->
-            <!--[errors]="formErrors.user_uuid"-->
-            <!--[feedback]="formErrors.user_uuid">-->
-          <!--</mg-select-grid>-->
+    <!--<mg-select-grid-->
+      <!--*ngIf="userSelectOptions"-->
+      <!--labelText="{{'DOCUMENTS.FORM.ADDED_BY' | translate}}*"-->
+      <!--controlName="user_uuid"-->
+      <!--[formGroup]="documentForm"-->
+      <!--[options]="userSelectOptions"-->
+      <!--[errors]="formErrors.user_uuid"-->
+      <!--[feedback]="formErrors.user_uuid">-->
+    <!--</mg-select-grid>-->
   <div class="documents-form__field documents-form__field--full-width">
     <fj-date-picker
+      *ngIf="isEditForm"
       [label]="'DOCUMENTS.FORM.DATE' | translate"
+      [customStyles]="{'width': '100%'}"
       [placeholder]="'Date'"
       [controlName]="create_date"
       inputPlaceholder=""

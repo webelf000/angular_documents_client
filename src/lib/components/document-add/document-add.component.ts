@@ -47,8 +47,8 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const oauthUser = this.authService.getOauthUser();
     this.selectedOauthUser = {
-      label: oauthUser.core_user.name,
-      value: oauthUser.core_user.core_user_uuid
+      label: oauthUser.name,
+      value: oauthUser.core_user_uuid
     };
   }
 
@@ -63,10 +63,14 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
       });
     } else {
       this.showButtonSpinner = true;
-      documentFormObject.file = this.fileData;
+      // documentFormObject.file = this.fileData;
+      documentFormObject.file = this.file;
+      documentFormObject.file_type = documentFormObject.file_name.split('.').pop(); // set the file extension
       documentFormObject.create_date = moment(documentFormObject.create_date, 'DD.MM.YYYY').format(
         'YYYY-MM-DDThh:mm:ssZ'
       );
+      documentFormObject.create_date = new Date();
+
       this.store.dispatch(createDocument(documentFormObject));
       this.createDocumentAdded = this.store.observable.pipe(select(getDocumentsLoaded));
       this.createDocumentSubscription = this.createDocumentAdded.subscribe((uploaded: boolean) => {

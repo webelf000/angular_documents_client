@@ -1,5 +1,4 @@
 <div class="preupload">
-    
     <div class="preupload-container" *ngIf="filePath; else loading">
       <!-- display image if document type is image -->
       <div *ngIf="isImage" class="preupload__image-container">
@@ -23,11 +22,13 @@
       </div>
     </div>
 
+
     <div *ngIf="filePath" class="preupload__file-info">
-      <mg-icon svgName="attachment" fillColor="black" class="preupload__file-icon"></mg-icon>
+      <fj-icon svgName="attachment" fillColor="black" class="preupload__file-icon"></fj-icon>
+
       <span>{{ fileUploaded.name }}</span>
       <span class="preupload__file-remove" data-dz-remove (click)="cancelUpload()">
-        <i class="icon-close"></i>
+        <fj-icon [svgName]="'close'" fillColor="black" class="preupload__file-remove"></fj-icon>
       </span>
     </div>
 

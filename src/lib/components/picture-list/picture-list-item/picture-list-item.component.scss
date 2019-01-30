@@ -1,7 +1,6 @@
 @import "../../../../../../../src/styles/global";
 
 :host{
-  width: 50%;
   padding: rem-calc(8 4 0 4);
 }
 .loader-wrap{
@@ -30,6 +29,7 @@
   }
   &__details {
     position: absolute;
+    box-sizing: border-box;
     font-size: rem-calc(11);
     width: 100%;
     height: 100%;

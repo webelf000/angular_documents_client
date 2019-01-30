@@ -20,7 +20,7 @@ export const loadAllDocumentEpic =  action$ => {
   return action$.pipe(
     reduxObservable.ofType(LOAD_ALL_DOCUMENTS),
     switchMap((action: Action) => {
-      return httpService.makeRequest('get', `${environment.API_URL}documents/documents/`, {}, true).pipe(
+      return httpService.makeRequest('get', `${environment.API_URL}/documents/documents/`, {}, true).pipe(
         // If successful, dispatch success action with result
         map(res => loadDocumentsCommit(res.data)),
         // If request fails, dispatch failed action
@@ -38,7 +38,7 @@ const loadOneDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(LOAD_ONE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('get', `${environment.API_URL}documents/documents/${action.id}/`, true).pipe(
+      return httpService.makeRequest('get', `${environment.API_URL}/documents/documents/${action.id}/`, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => loadOneDocumentCommit(res.data)),
         // If request fails, dispatch failed action
@@ -58,7 +58,7 @@ const createDocumentEpic = action$ => {
     switchMap((action: Action) => {
       // It needs to transform the document object into FormData multipart format for the upload.
       const documentMultipartFormated = makeFormDataFile(action.data);
-      return httpService.makeRequest('post', `${environment.API_URL}documents/documents/`, documentMultipartFormated, true).pipe(
+      return httpService.makeRequest('post', `${environment.API_URL}/documents/documents/`, documentMultipartFormated, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => createDocumentCommit(res.data, action.nested)),
         // If request fails, dispatch failed action
@@ -76,7 +76,7 @@ const updateDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(UPDATE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('put', `${environment.API_URL}documents/documents/${action.data.id}/`, action.data, true).pipe(
+      return httpService.makeRequest('put', `${environment.API_URL}/documents/documents/${action.data.id}/`, action.data, true).pipe(
         // If successful, dispatch success action with result
         map((res: Action) => updateDocumentCommit(res.data, action.nested)),
         // If request fails, dispatch failed action
@@ -94,7 +94,7 @@ const deleteDocumentEpic = action$ => {
   return action$.pipe(
     reduxObservable.ofType(DELETE_DOCUMENT),
     switchMap((action: Action) => {
-      return httpService.makeRequest('delete', `${environment.API_URL}documents/documents/${action.data.id}/`, {}, true).pipe(
+      return httpService.makeRequest('delete', `${environment.API_URL}/documents/documents/${action.data.id}/`, {}, true).pipe(
         // If successful, dispatch success action with result
         map(res => deleteDocumentCommit(action.data, null)),
         // If request fails, dispatch failed action

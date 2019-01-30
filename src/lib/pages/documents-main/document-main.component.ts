@@ -21,7 +21,6 @@ import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/compo
 import { Subscription } from 'rxjs';
 import { ModalComponent } from 'freyja-ui';
 
-
 @Component({
   selector: 'lib-documents-main',
   templateUrl: './document-main.component.html',

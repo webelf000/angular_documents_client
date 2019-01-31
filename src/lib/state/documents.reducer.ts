@@ -3,7 +3,7 @@ import {
   DELETE_DOCUMENT_COMMIT,
   LOAD_ALL_DOCUMENTS_COMMIT, LOAD_ONE_DOCUMENT_COMMIT, SAVE_BLOB_URL, UPDATE_DOCUMENT_COMMIT
 } from './documents.actions';
-import { addAll, deleteOne, upsertOne } from '@libs/midgard-angular/src/lib/state/reducer.utils';
+import { addAll, upsertOne } from '@libs/midgard-angular/src/lib/state/reducer.utils';
 import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   updated: false,
   deleted: false
 };
-// should be refactored to use reducer.utils, and refactor the function
+// TODO: should be refactored to use reducer.utils, and refactor the function
 // in reducers.utils to handle the case when there is another object under data in this case 'results'
 export function documentsReducer(state = initialState, action: Action) {
   switch (action.type) {

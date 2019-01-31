@@ -36,15 +36,6 @@
     </fj-native-dropdown>
   </div>
 
-    <!--<mg-select-grid-->
-      <!--*ngIf="userSelectOptions"-->
-      <!--labelText="{{'DOCUMENTS.FORM.ADDED_BY' | translate}}*"-->
-      <!--controlName="user_uuid"-->
-      <!--[formGroup]="documentForm"-->
-      <!--[options]="userSelectOptions"-->
-      <!--[errors]="formErrors.user_uuid"-->
-      <!--[feedback]="formErrors.user_uuid">-->
-    <!--</mg-select-grid>-->
   <div class="documents-form__field documents-form__field--full-width">
     <fj-date-picker
       *ngIf="isEditForm"
@@ -58,6 +49,7 @@
       [fileCreateDate]="currentDate"
       [formGroup]="documentForm"
       [error]="formErrors.create_date"
+      [disabled]="true"
       >
     </fj-date-picker>
   </div>
@@ -68,20 +60,4 @@
       {{ 'DOCUMENTS.FORM.SAVE' | translate}}
     </fj-button>
   </div>
-
-          <!--<mg-submit-grid-->
-              <!--[showButtonSpinner]="showButtonSpinner"-->
-              <!--[submitValue]="'DOCUMENTS.FORM.SAVE' | translate"-->
-              <!--[disabledSubmit]="(isEditForm && (!documentForm.dirty || !documentForm.valid)) || (!isEditForm && !documentForm.valid)">-->
-
-            <!--<ng-container *ngIf="isEditForm">-->
-                <!--<span class="document-actions" (click)="documentDelete()">-->
-                  <!--<i class="icon-trash"></i>-->
-                <!--</span>-->
-                <!--<a class="document-actions" *ngIf="filePath" [href]="filePath" download>-->
-                  <!--<i class="icon-download"></i>-->
-                <!--</a>-->
-            <!--</ng-container>-->
-
-          <!--</mg-submit-grid>-->
-  </form>
+</form>

@@ -75,10 +75,10 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
       this.createDocumentAdded = this.store.observable.pipe(select(getDocumentsLoaded));
       this.createDocumentSubscription = this.createDocumentAdded.subscribe((uploaded: boolean) => {
         this.documentAdded.emit();
-        const message = this.translateService.instant('DOCUMENTS.NOTIFICATIONS.UPLOAD_SUCCESS');
-        this.snackBar.open(message, 'Ok', {
-          duration: 2000,
-        });
+        // const message = this.translateService.instant('DOCUMENTS.NOTIFICATIONS.UPLOAD_SUCCESS');
+        // this.snackBar.open(message, 'Ok', {
+        //   duration: 2000,
+        // });
         if (!uploaded) {
           this.clearFile(documentFormObject);
         }

@@ -14,7 +14,6 @@ import * as moment from 'moment';
 
 import { Document } from '../../state/models/document.model';
 import { MatSnackBar } from '@angular/material';
-import { FormValidationService } from '@libs/midgard-angular/src/lib/services/form-validator.service';
 
 @Component({
   selector: 'mg-document-form',

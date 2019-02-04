@@ -74,7 +74,6 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private formValidationService: FormValidationService,
     private snackBar: MatSnackBar
   ) {
     this.initForm(this.documentObject);
@@ -198,16 +197,6 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
           this.uploadDocument.next(document);
         }
       } else {
-        // call validate() from FromValidationService to valdiate the form
-        this.formValidationService.validate(
-          this.documentForm,
-          false,
-          this.formErrors,
-          this.formValidationMessages
-        );
-        this.snackBar.open('Please fill the required fields', 'Ok', {
-          duration: 2000,
-        });
         this.formSubmited = false;
         window.scrollTo(0, 0);
       }

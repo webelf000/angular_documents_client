@@ -5,6 +5,7 @@ import {
 } from './documents.actions';
 import { addAll, upsertOne } from '@libs/midgard-angular/src/lib/state/reducer.utils';
 import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
+import {deleteOne, upsertOne} from '../../../../midgard-angular/src/lib/state/reducer.utils';
 
 const initialState = {
   data: null,
@@ -13,8 +14,7 @@ const initialState = {
   updated: false,
   deleted: false
 };
-// TODO: should be refactored to use reducer.utils, and refactor the function
-// in reducers.utils to handle the case when there is another object under data in this case 'results'
+
 export function documentsReducer(state = initialState, action: Action) {
   switch (action.type) {
     case LOAD_ALL_DOCUMENTS_COMMIT:
@@ -22,23 +22,13 @@ export function documentsReducer(state = initialState, action: Action) {
     case LOAD_ONE_DOCUMENT_COMMIT:
       return upsertOne(state, action);
     case CREATE_DOCUMENT_COMMIT:
-      return state = {...state, data: { results: [...state.data.results, action.data]}, loaded: true, created: true};
+      return upsertOne(state, action, 'results');
     case UPDATE_DOCUMENT_COMMIT:
-      return upsertOne(state, action);
+      return upsertOne(state, action, 'results');
     case DELETE_DOCUMENT_COMMIT:
-      return {...state, data: { results: state.data.results.filter (item => item.id !== action.data.id)}, deleted: true};
+      return deleteOne(state, action, 'results')
     case SAVE_BLOB_URL:
-      if (state.data['results']) {
-        return {...state, data: { results: state.data['results'].map (item => {
-          if (item.id === action.data.id) {
-            return action.data;
-          } else {
-            return item;
-          }
-        })}, loaded: true, updated: true};
-      } else {
-        return state;
-      }
+      return upsertOne(state, action, 'results');
     default:
       return state;
   }

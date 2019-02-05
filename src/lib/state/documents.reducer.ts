@@ -3,9 +3,8 @@ import {
   DELETE_DOCUMENT_COMMIT,
   LOAD_ALL_DOCUMENTS_COMMIT, LOAD_ONE_DOCUMENT_COMMIT, SAVE_BLOB_URL, UPDATE_DOCUMENT_COMMIT
 } from './documents.actions';
-import { addAll, upsertOne } from '@libs/midgard-angular/src/lib/state/reducer.utils';
 import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
-import {deleteOne, upsertOne} from '../../../../midgard-angular/src/lib/state/reducer.utils';
+import {deleteOne, upsertOne, addAll} from '../../../../midgard-angular/src/lib/state/reducer.utils';
 
 const initialState = {
   data: null,

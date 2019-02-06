@@ -25,7 +25,7 @@ export function documentsReducer(state = initialState, action: Action) {
     case UPDATE_DOCUMENT_COMMIT:
       return upsertOne(state, action, 'results');
     case DELETE_DOCUMENT_COMMIT:
-      return deleteOne(state, action, 'results')
+      return deleteOne(state, action, 'results');
     case SAVE_BLOB_URL:
       return upsertOne(state, action, 'results');
     default:

@@ -124,7 +124,7 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
         const usersOptions: any[] = [];
         users.data.forEach((user) => {
           usersOptions.push({
-            label: user.name,
+            label: user.fullName,
             value: user.core_user_uuid
           });
         });

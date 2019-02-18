@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
 import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
@@ -18,8 +18,10 @@ import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/co
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
-import { Subscription } from 'rxjs';
-import { ModalComponent } from 'freyja-ui';
+import { ModalComponent} from 'freyja-ui';
+import {setTopBarOptions} from '../../../../../midgard-angular/src/lib/state/top-bar/top-bar.actions';
+import {CardItemOptions} from '../../../../../midgard-angular/src/lib/components/card-item/card-item-options';
+import {getTopBarSelectedOption} from '../../../../../midgard-angular/src/lib/state/top-bar/top-bar.selectors';
 
 @Component({
   selector: 'lib-documents-main',
@@ -40,6 +42,26 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   // public projects = [];
   public documentsLoaded: Observable<any>;
   // public showHeader = false;
+  public tableOptions;
+  public cardItemOptions: CardItemOptions;
+  public topBarOptions = [
+    {
+      label: 'All',
+      value: 'all'
+    },
+    {
+      label: 'Documents',
+      value: 'documents'
+    },
+    {
+      label: 'Pictures',
+      value: 'pictures'
+    }
+  ];
+  public showDocumentsSection = true;
+  public showPicturesSection = true;
+  public selector = getAllDocuments;
+
   constructor(
     public dialog: MatDialog,
     private store: Store<any>,
@@ -50,6 +72,30 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(setTopBarOptions(this.topBarOptions));
+    this.store.observable.pipe(select(getTopBarSelectedOption)).subscribe(data => {
+      if (data) {
+        switch (data.value) {
+          case 'documents' :
+            this.showPicturesSection = false;
+            this.showDocumentsSection = true;
+            break;
+          case 'pictures' :
+            this.showPicturesSection = true;
+            this.showDocumentsSection = false;
+            break;
+          default:
+            this.showPicturesSection = true;
+            this.showDocumentsSection = true;
+            break;
+        }
+      } else {
+        this.showPicturesSection = true;
+        this.showDocumentsSection = true;
+      }
+    });
+    // this.defineCardItemOptions();
+    // this.defineTableOptions();
     this.coreUserList = this.getCoreUsers();
     this.workflowLevel2List = this.getWorkFlowLevel2();
     this.getDocuments();
@@ -60,6 +106,92 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadCoreuserData());
     this.store.dispatch(loadDocuments());
   }
+
+  /**
+   * TODO: New documents client
+   * defines options for card item components
+   */
+  // private defineCardItemOptions() {
+  //   this.cardItemOptions = {
+  //     title: {
+  //       prop: 'file_name',
+  //       label: 'Document Name'
+  //     },
+  //     picture: {
+  //       thumbnail: 'blobLocalUrl',
+  //       image: 'blobLocalUrl'
+  //     },
+  //     dateHeader1: {
+  //       prop: 'create_date',
+  //       label: 'Created at'
+  //     },
+  //     dateHeader2: {
+  //       prop: 'edit_date',
+  //       label: 'Updated at'
+  //     },
+  //     date1: {
+  //       prop: 'create_date',
+  //       label: 'Created at'
+  //     },
+  //     date2: {
+  //       prop: 'edit_date',
+  //       label: 'Updated at'
+  //     },
+  //     description: {
+  //       prop: 'file_description',
+  //       label: 'Description'
+  //     },
+  //     belowMenuPrimaryAction: {
+  //       label: 'Upload File',
+  //       value: 'new'
+  //     },
+  //     secondaryAction: {
+  //       label: 'Download',
+  //       value: 'download'
+  //     },
+  //     otherActions: [
+  //       {
+  //         label: '•••',
+  //         value: '•••'
+  //       },
+  //       {
+  //         label: 'Delete',
+  //         value: 'delete'
+  //       },
+  //       {
+  //         label: 'Share',
+  //         value: 'share'
+  //       }
+  //     ],
+  //     belowMenuOtherActions: [
+  //       {
+  //         label: '•••',
+  //         value: '•••'
+  //       },
+  //       {
+  //         label: 'Delete',
+  //         value: 'delete'
+  //       },
+  //       {
+  //         label: 'Share',
+  //         value: 'share'
+  //       }
+  //     ]
+  //   };
+  // }
+  //
+  // /**
+  //  * defines options for the table component
+  //  */
+  // private defineTableOptions() {
+  //   this.tableOptions = {
+  //     columns: [
+  //       {name: 'Name', prop: 'file_name', flex: 2, sortable: true, filtering: true},
+  //       {name: 'Date Created', prop: 'create_date', index: 1, flex: 1, cellTemplate: 'date', sortable: true},
+  //       {name: '', cellTemplate: 'actions', actions: ['delete', 'download']},
+  //     ]
+  //   };
+  // }
 
   /**
    * Gets the current workflowlevel2 from the store

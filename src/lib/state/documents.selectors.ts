@@ -2,10 +2,36 @@ import { getAllWorkflowLevel2s } from '@libs/midgard-angular/src/lib/state/workf
 import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
 import { Document } from '@libs/documents/src/lib/state/models/document.model';
 import { reselect } from '@libs/midgard-angular/src/lib/modules/store';
+import {fileRequestType} from './models/fileRequestType.model';
+import {ImageLoadingService} from '../services/image-loading.service';
+import {HttpService} from '../../../../midgard-angular/src/lib/modules/http/http.service';
+import {Store} from '../../../../midgard-angular/src/lib/modules/store/store';
+import {DomSanitizer} from '@angular/platform-browser';
 
 const helper = new FileExtensionHelper();
+const httpService = new HttpService();
+const store = new Store();
+const imageLoadingService = new ImageLoadingService(httpService, store);
 
 const getDocuments = state => state.documentsReducer;
+
+// TODO: New documents version
+// export const getAllDocuments = reselect.createSelector(
+//   getDocuments,
+//   (documents) => {
+//     if (documents && documents.data) {
+//       documents.data.results.forEach( document => {
+//         if (!document.blobLocalUrl) {
+//           imageLoadingService.loadImage(document, fileRequestType.image, true);
+//         }
+//       });
+//       return {
+//         data: documents.data.results,
+//         loaded: documents.loaded
+//       };
+//     }
+//   }
+// );
 
 export const getAllDocuments = reselect.createSelector(
   getDocuments,

@@ -32,6 +32,7 @@ import {FjDatePickerModule} from 'freyja-ui';
 import {FjNativeDropdownModule} from 'freyja-ui';
 import {FjDragAndDropModule} from 'freyja-ui';
 import {IconModule} from 'freyja-ui';
+import {MidgardCrudModule} from '../../../midgard-angular/src/lib/modules/crud/crud.module';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import {IconModule} from 'freyja-ui';
     FjDatePickerModule,
     FjNativeDropdownModule,
     FjDragAndDropModule,
+    MidgardCrudModule,
     IconModule
   ],
   declarations: [

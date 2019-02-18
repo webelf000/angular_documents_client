@@ -1,3 +1,18 @@
+<!-- TODO: New Version-->
+<!--<mg-crud-list-->
+  <!--[loadAction]="'LOAD_ALL_DOCUMENTS'"-->
+  <!--[title]="'Documents'"-->
+  <!--[tableOptions]="tableOptions"-->
+  <!--[cardItemOptions]="cardItemOptions"-->
+  <!--[selector]="selector"-->
+  <!--[deleteAction]="'DELETE_DOCUMENT'"-->
+  <!--[updateAction]="'UPDATE_DOCUMENT'"-->
+  <!--[createAction]="'CREATE_DOCUMENT'"-->
+  <!--[addButtonText]="'Upload Document'"-->
+<!--&gt;-->
+<!--</mg-crud-list>-->
+
+
 <div>
   <h3>Documents</h3>
 </div>
@@ -9,7 +24,7 @@
 <div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
   <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
   <ng-template #showPictures>
-    <mg-ui-card>
+    <mg-ui-card *ngIf="showPicturesSection">
       <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>
       <mg-ui-card-content>
         <mg-picture-list
@@ -20,6 +35,7 @@
       </mg-ui-card-content>
     </mg-ui-card>
     <mg-document-list
+        *ngIf="showDocumentsSection"
         [documentList]="documentList | async"
         [projects] = "workflowLevel2List | async"
         (docToPreview)="setPreviwedDoc($event)"

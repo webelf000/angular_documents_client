@@ -30,6 +30,7 @@ import {
   IconModule
 } from 'freyja-ui';
 import {MidgardCrudModule} from '../../../midgard-angular/src/lib/modules/crud/crud.module';
+import {CardComponent} from '../../../midgard-angular/src/lib/components/card/card.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import {MidgardCrudModule} from '../../../midgard-angular/src/lib/modules/crud/c
     MgSpinnerModule,
     DeleteConfirmationModule,
     TableModule,
+    CardComponent,
     IconModule,
     FjButtonModule,
     FjModalModule,

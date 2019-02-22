@@ -9,7 +9,7 @@
       <a class="photo__actions" (click)="downloadPicture($event)">
         <fj-icon svgName="download" fillColor="white" *ngIf="!showSpinner; else spinner;"></fj-icon>
         <ng-template #spinner>
-          <mg-spinner size="xsmall" class="actions__spinner"></mg-spinner>
+          <fj-spinner size="xsmall" class="actions__spinner"></fj-spinner>
         </ng-template>
       </a>
       <a class="photo__actions photo__actions--delete" (click)="deletePicture($event, picture)">
@@ -20,7 +20,7 @@
 </div>
 <ng-template #loading>
   <div class="loader-wrap">
-    <mg-loader class="loader"></mg-loader>
+    <fj-spinner class="loader"></fj-spinner>
     <img src="../assets/img/white-mask.png" class="photo__mask-image">
   </div>
 </ng-template>

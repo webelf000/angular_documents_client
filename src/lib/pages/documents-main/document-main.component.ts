@@ -17,7 +17,7 @@ import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angul
 import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.selectors';
 import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
-import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
+import { DeleteConfirmationComponent } from '@libs/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
 import { ModalComponent} from 'freyja-ui';
 import {setTopBarOptions} from '../../../../../midgard-angular/src/lib/state/top-bar/top-bar.actions';
 import {CardItemOptions} from '../../../../../midgard-angular/src/lib/components/card-item/card-item-options';

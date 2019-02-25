@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { TableEmitObject } from  '@libs/midgard-angular/src/lib/components/table/table.model';
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
+import { TableEmitObject } from 'freyja-ui/lib/table/table.model';
 
 @Component({
   selector: 'mg-document-list',
@@ -30,22 +30,16 @@ export class DocumentListComponent implements OnInit {
   ngOnInit() {
     this.columns = [
       {
-        name: 'DOCUMENTS.DOCUMENTS_LIST.DOCUMENT_NAME',
+        name: 'Document',
         prop: 'file_name',
         flex: 2,
         sortable: false
       },
       {
-        name: 'DOCUMENTS.DOCUMENTS_LIST.DATE',
+        name: 'Create Date',
         prop: 'create_date',
         flex: '120px',
         cellTemplate: 'date',
-        sortable: false
-      },
-      {
-        name: 'DOCUMENTS.DOCUMENTS_LIST.PROJECT_NAME',
-        prop: 'projects',
-        flex: 2,
         sortable: false
       },
       {

@@ -1,10 +1,11 @@
-<freyja-table
+<fj-table
   #table
   [rows]="documentList"
   [columns]="columns"
+  [noDataMessage]="'No Documents Available'"
   (download)="downloadDocument($event)"
   (delete)="deleteDocument($event)"
   (selectItem)="previewDocument($event)"
   [downloadSpinner]="true"
 >
-</freyja-table>
+</fj-table>

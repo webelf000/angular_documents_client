@@ -1,0 +1,12 @@
+@import "../../../../../../src/styles";
+
+.mat-dialog-content {
+  max-height: 300px !important;
+}
+
+.buttons {
+  display: flex;
+  &__item {
+    margin-right: rem-calc(15);
+  }
+}

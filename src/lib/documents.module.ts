@@ -3,12 +3,10 @@ import { DocumentMainComponent } from './pages/documents-main/document-main.comp
 import { DocumentsRoutingModule } from '@libs/documents/src/lib/documents-routing.module';
 import { MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { MidgardModule } from '@libs/midgard-angular/src/lib/midgard.module';
-import { MgSpinnerModule } from '@libs/midgard-angular/src/lib/components/spinner/spinner.module';
 import { PictureListItemComponent } from '@libs/documents/src/lib/components/picture-list/picture-list-item/picture-list-item.component';
 import { DocumentFormComponent } from '@libs/documents/src/lib/components/document-form/document-form.component';
 import { DocumentAddComponent } from '@libs/documents/src/lib/components/document-add/document-add.component';
 import { PictureListComponent } from '@libs/documents/src/lib/components/picture-list/picture-list.component';
-import { TableModule } from '@libs/midgard-angular/src/lib/components/table/table.module';
 import { DocumentListComponent } from '@libs/documents/src/lib/components/document-list/document-list.component';
 import { DocumentPreviewComponent } from '@libs/documents/src/lib/components/document-preview/document-preview.component';
 import { DocumentPreuploadComponent } from '@libs/documents/src/lib/components/document-preupload/document-preupload.component';
@@ -18,8 +16,8 @@ import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extens
 import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
 import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
 import { MidgardSharedTranslationModule } from '@libs/midgard-angular/src/lib/modules/translation/translation.shared.module';
-import { DeleteConfirmationModule } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.module';
-import { DeleteConfirmationComponent } from '@libs/midgard-angular/src/lib/components/delete-confirmation/delete-confirmation.component';
+import { DeleteConfirmationModule } from '@libs/documents/src/lib/components/delete-confirmation/delete-confirmation.module';
+import { DeleteConfirmationComponent } from '@libs/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
 import {
   FjButtonModule,
   FjModalModule,
@@ -27,10 +25,10 @@ import {
   FjDatePickerModule,
   FjNativeDropdownModule,
   FjDragAndDropModule,
-  IconModule
+  IconModule, FjTableModule, FjSpinnerModule, FjCardModule
 } from 'freyja-ui';
 import {MidgardCrudModule} from '../../../midgard-angular/src/lib/modules/crud/crud.module';
-import {CardModule} from '../../../midgard-angular/src/lib/components/card/card.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -40,18 +38,19 @@ import {CardModule} from '../../../midgard-angular/src/lib/components/card/card.
     MidgardModule,
     MatSnackBarModule,
     MatDialogModule,
-    MgSpinnerModule,
+    FjSpinnerModule,
     DeleteConfirmationModule,
-    TableModule,
-    CardModule,
+    FjTableModule,
     IconModule,
     FjButtonModule,
     FjModalModule,
+    FjCardModule,
     FjTextInputModule,
     FjDatePickerModule,
     FjNativeDropdownModule,
     FjDragAndDropModule,
     MidgardCrudModule,
+    ReactiveFormsModule,
     IconModule
   ],
   declarations: [

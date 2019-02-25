@@ -16,7 +16,6 @@
 <div>
   <h3>Documents
     <fj-button
-      *ngIf="'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate"
       (click)="openDocumentFormModal()"
       [shape]="'rounded'"
       [size]="'small'"
@@ -24,22 +23,18 @@
       [margin]="'0px 5px'"
       [iconPosition]="'before'"
       [icon]="'plus'"
-    >{{addButtonText}}</fj-button>
+    >{{'DOCUMENTS.MAIN.UPLOAD_DOCUMENTS' | translate}}</fj-button>
   </h3>
 </div>
 <div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
-  <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
+  <fj-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></fj-spinner>
   <ng-template #showPictures>
-    <mg-ui-card *ngIf="showPicturesSection">
-      <mg-ui-card-title>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</mg-ui-card-title>
-      <mg-ui-card-content>
-        <mg-picture-list
-            [pictureList]="pictureList | async"
-            (docToPreview)="setPreviwedDoc($event)"
-            (delete)="openDeleteConfirmModal($event)">
-        </mg-picture-list>
-      </mg-ui-card-content>
-    </mg-ui-card>
+    <h4>{{'DOCUMENTS.MAIN.PICTURES' | translate}}</h4>
+    <mg-picture-list
+        [pictureList]="pictureList | async"
+        (docToPreview)="setPreviwedDoc($event)"
+        (delete)="openDeleteConfirmModal($event)">
+    </mg-picture-list>
     <mg-document-list
         *ngIf="showDocumentsSection"
         [documentList]="documentList | async"

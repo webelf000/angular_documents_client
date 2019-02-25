@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ngx-translate/core": "^11.0.0",
-    "freyja-ui": "0.0.20",
+    "freyja-ui": "^0.1.2",
     "moment": "^2.22.2",
     "rxjs": "6.3.2"
   },

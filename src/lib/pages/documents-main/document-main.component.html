@@ -27,7 +27,6 @@
     >{{addButtonText}}</fj-button>
   </h3>
 </div>
-</fj-button>
 <div class="pictures" *ngIf="documentsLoaded && pictureList && documentList;">
   <mg-spinner *ngIf="documentsLoaded && (!documentsLoaded | async); else showPictures"></mg-spinner>
   <ng-template #showPictures>

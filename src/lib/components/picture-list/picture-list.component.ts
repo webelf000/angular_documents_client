@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { DeleteConfirmationComponent } from '@libs/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
-import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
+import { Store } from '@src/midgard/modules/store/store';
+import { DeleteConfirmationComponent } from '@clients/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
+import { MidgardTranslateService } from '@src/midgard/modules/translation/translation-loader/translate.service';
 import { MatDialog } from '@angular/material';
 
 @Component({

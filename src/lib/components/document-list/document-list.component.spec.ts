@@ -5,9 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DocumentListComponent } from './document-list.component';
 // import {TableMockComponent} from '../../../../../testing/mock.data';
 import {Subscription} from 'rxjs/Subscription';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
-import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
-import { FileSavingStubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { MidgardStoreModule } from '@src/midgard/modules/store/store.module';
+import { FileSavingService } from '@clients/documents/src/lib/services/file-saving.service';
+import { FileSavingStubService } from '@src/midgard/testing-utilities/stubs';
 import { of } from 'rxjs';
 
 describe('DocumentListComponent', () => {

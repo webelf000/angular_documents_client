@@ -1,6 +1,6 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
 @Component({
   selector: 'mg-document-preupload',
   templateUrl: './document-preupload.component.html',

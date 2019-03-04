@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
-import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
-import { fileRequestType } from '@libs/documents/src/lib/state/models/fileRequestType.model';
-import { Document } from '@libs/documents/src/lib/state/models/document.model';
+import { ImageLoadingService } from '@clients/documents/src/lib/services/image-loading.service';
+import { FileSavingService } from '@clients/documents/src/lib/services/file-saving.service';
+import { fileRequestType } from '@clients/documents/src/lib/state/models/fileRequestType.model';
+import { Document } from '@clients/documents/src/lib/state/models/document.model';
 
 @Component({
   selector: 'mg-picture-list-item',

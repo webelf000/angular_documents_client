@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
-import { saveBlobUrl } from '@libs/documents/src/lib/state/documents.actions';
-import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { Document } from '@libs/documents/src/lib/state/models/document.model';
+import { saveBlobUrl } from '@clients/documents/src/lib/state/documents.actions';
+import { Store } from '@src/midgard/modules/store/store';
+import { HttpService } from '@src/midgard/modules/http/http.service';
+import { Document } from '@clients/documents/src/lib/state/models/document.model';
 import {environment} from '@env/environment';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
+import { HttpService } from '@src/midgard/modules/http/http.service';
 import { switchMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { environment } from '@env/environment';
@@ -7,8 +7,8 @@ import {
   updateDocumentCommit, updateDocumentFail, deleteDocumentCommit, deleteDocumentFail, createDocumentCommit, createDocumentFail,
   CREATE_DOCUMENT, DELETE_DOCUMENT, UPDATE_DOCUMENT, LOAD_ALL_DOCUMENTS, LOAD_ONE_DOCUMENT, loadDocumentsCommit, loadDocumentsFail
 } from './documents.actions';
-import { Action } from '@libs/midgard-angular/src/lib/state/action.type';
-import { reduxObservable } from '@libs/midgard-angular/src/lib/modules/store';
+import { Action } from '@src/midgard/state/action.type';
+import { reduxObservable } from '@src/midgard/modules/store';
 
 const httpService = new HttpService();
 

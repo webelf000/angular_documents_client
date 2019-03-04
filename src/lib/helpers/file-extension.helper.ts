@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { fileRequestType } from '@libs/documents/src/lib/state/models/fileRequestType.model';
-import { Document } from '@libs/documents/src/lib/state/models/document.model';
+import { fileRequestType } from '@clients/documents/src/lib/state/models/fileRequestType.model';
+import { Document } from '@clients/documents/src/lib/state/models/document.model';
 
 @Injectable()
 export class FileExtensionHelper {

@@ -5,10 +5,10 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Document } from '../../state/models/document.model';
 import * as moment from 'moment';
-import { MatSnackBarStub, OAuthStubService, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
-import { OAuthService } from '@libs/midgard-angular/src/lib/modules/oauth/oauth.service';
+import { MatSnackBarStub, OAuthStubService, StubService } from '@src/midgard/testing-utilities/stubs';
+import { OAuthService } from '@src/midgard/modules/oauth/oauth.service';
 import { MatSnackBar } from '@angular/material';
-import { mockProjects } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
+import { mockProjects } from '@src/midgard/testing-utilities/mock.data';
 
 describe('DocumentFormComponent', () => {
   let component: DocumentFormComponent;

@@ -2,10 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PictureListItemComponent } from './picture-list-item.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
-import { FileSavingStubService, ImageLoadingStubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
-import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
-import { documentsMock } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
+import { FileSavingService } from '@clients/documents/src/lib/services/file-saving.service';
+import { FileSavingStubService, ImageLoadingStubService } from '@src/midgard/testing-utilities/stubs';
+import { ImageLoadingService } from '@clients/documents/src/lib/services/image-loading.service';
+import { documentsMock } from '@src/midgard/testing-utilities/mock.data';
 import { of } from 'rxjs';
 
 describe('PictureListItemComponent', () => {

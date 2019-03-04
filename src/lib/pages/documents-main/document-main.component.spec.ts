@@ -1,13 +1,13 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DocumentMainComponent } from './document-main.component';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
-import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
-import { ActivatedRouteStub, MatDialogStub, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
+import { MidgardStoreModule } from '@src/midgard/modules/store/store.module';
+import { MidgardTranslationTestModule } from '@src/midgard/testing-utilities/translation-testing.module';
+import { ActivatedRouteStub, MatDialogStub, StubService } from '@src/midgard/testing-utilities/stubs';
+import { HttpService } from '@src/midgard/modules/http/http.service';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { select, Store } from '@src/midgard/modules/store/store';
 import { ActivatedRoute } from '@angular/router';
 
 

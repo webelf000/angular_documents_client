@@ -2,16 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocumentAddComponent } from './document-add.component';
-import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { MatSnackBarStub, OAuthStubService, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
-import { OAuthService } from '@libs/midgard-angular/src/lib/modules/oauth/oauth.service';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
+import { Store } from '@src/midgard/modules/store/store';
+import { MatSnackBarStub, OAuthStubService, StubService } from '@src/midgard/testing-utilities/stubs';
+import { OAuthService } from '@src/midgard/modules/oauth/oauth.service';
+import { MidgardStoreModule } from '@src/midgard/modules/store/store.module';
 import { MatSnackBar } from '@angular/material';
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
+import { HttpService } from '@src/midgard/modules/http/http.service';
+import { MidgardTranslationTestModule } from '@src/midgard/testing-utilities/translation-testing.module';
 import { of } from 'rxjs';
-import { createDocument } from '@libs/documents/src/lib/state/documents.actions';
-import { documentCreateMock } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
+import { createDocument } from '@clients/documents/src/lib/state/documents.actions';
+import { documentCreateMock } from '@src/midgard/testing-utilities/mock.data';
 
 describe('DocumentAddComponent', () => {
   let component: DocumentAddComponent;

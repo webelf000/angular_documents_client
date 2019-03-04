@@ -11,13 +11,13 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Subject } from 'rxjs/Subject';
 import { FileExtensionHelper } from '../../helpers/file-extension.helper';
 import { Subscription } from 'rxjs/Subscription';
-import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
-import { selectDocument } from '@libs/documents/src/lib/state/documents.selectors';
-import { fileRequestType } from '@libs/documents/src/lib/state/models/fileRequestType.model';
-import { updateDocument } from '@libs/documents/src/lib/state/documents.actions';
+import { select, Store } from '@src/midgard/modules/store/store';
+import { ImageLoadingService } from '@clients/documents/src/lib/services/image-loading.service';
+import { selectDocument } from '@clients/documents/src/lib/state/documents.selectors';
+import { fileRequestType } from '@clients/documents/src/lib/state/models/fileRequestType.model';
+import { updateDocument } from '@clients/documents/src/lib/state/documents.actions';
 import { MatSnackBar } from '@angular/material';
-import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
+import { MidgardTranslateService } from '@src/midgard/modules/translation/translation-loader/translate.service';
 
 @Component({
   selector: 'mg-document-preview',

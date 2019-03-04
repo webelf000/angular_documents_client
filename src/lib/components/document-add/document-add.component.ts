@@ -3,12 +3,12 @@ import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { DocumentFormComponent } from './../document-form/document-form.component';
-import { OAuthService } from '@libs/midgard-angular/src/lib/modules/oauth/oauth.service';
-import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { OAuthService } from '@src/midgard/modules/oauth/oauth.service';
+import { select, Store } from '@src/midgard/modules/store/store';
 import { MatSnackBar } from '@angular/material';
-import { createDocument } from '@libs/documents/src/lib/state/documents.actions';
-import { getDocumentsLoaded } from '@libs/documents/src/lib/state/documents.selectors';
-import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
+import { createDocument } from '@clients/documents/src/lib/state/documents.actions';
+import { getDocumentsLoaded } from '@clients/documents/src/lib/state/documents.selectors';
+import { MidgardTranslateService } from '@src/midgard/modules/translation/translation-loader/translate.service';
 
 @Component({
   selector: 'mg-document-add',

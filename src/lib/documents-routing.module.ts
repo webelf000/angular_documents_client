@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthGuard } from '@libs/midgard-angular/src/lib/modules/oauth/auth.guard';
-import { DocumentMainComponent } from '@libs/documents/src/lib/pages/documents-main/document-main.component';
+import { AuthGuard } from '@src/midgard/modules/oauth/auth.guard';
+import { DocumentMainComponent } from '@clients/documents/src/lib/pages/documents-main/document-main.component';
 
 const documentsRoutes: Routes = [
   { path: '', component: DocumentMainComponent, canActivate: [AuthGuard]},

@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { PictureListComponent } from './picture-list.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MatDialogStub, MatSnackBarStub, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
+import { MatDialogStub, MatSnackBarStub, StubService } from '@src/midgard/testing-utilities/stubs';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
-import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
-import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { HttpService } from '@src/midgard/modules/http/http.service';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
+import { MidgardStoreModule } from '@src/midgard/modules/store/store.module';
+import { MidgardTranslationTestModule } from '@src/midgard/testing-utilities/translation-testing.module';
+import { Store } from '@src/midgard/modules/store/store';
 
 describe('PictureListComponent', () => {
   let component: PictureListComponent;

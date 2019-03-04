@@ -1,27 +1,27 @@
 import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs/Observable';
-import { loadWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.actions';
-import { loadCoreuserData } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.actions';
-import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
+import { loadWorkflowLevel2 } from '@src/midgard/state/workflow-level2/workflow-level2.actions';
+import { loadCoreuserData } from '@src/midgard/state/coreuser/coreuser.actions';
+import { select, Store } from '@src/midgard/modules/store/store';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { HttpService } from '@libs/midgard-angular/src/lib/modules/http/http.service';
+import { HttpService } from '@src/midgard/modules/http/http.service';
 import {
   getAllDocuments,
   getDocumentsLoaded, selectDocuments, selectPictures,
   selectProjectDocuments,
   selectProjectPictures
-} from '@libs/documents/src/lib/state/documents.selectors';
-import { loadDocuments } from '@libs/documents/src/lib/state/documents.actions';
-import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
-import { getAllCoreUsers } from '@libs/midgard-angular/src/lib/state/coreuser/coreuser.selectors';
-import { MidgardTranslateService } from '@libs/midgard-angular/src/lib/modules/translation/translation-loader/translate.service';
+} from '@clients/documents/src/lib/state/documents.selectors';
+import { loadDocuments } from '@clients/documents/src/lib/state/documents.actions';
+import { getAllWorkflowLevel2s, selectWorkflowLevel2 } from '@src/midgard/state/workflow-level2/workflow-level2.selectors';
+import { getAllCoreUsers } from '@src/midgard/state/coreuser/coreuser.selectors';
+import { MidgardTranslateService } from '@src/midgard/modules/translation/translation-loader/translate.service';
 import { ActivatedRoute } from '@angular/router';
-import { DeleteConfirmationComponent } from '@libs/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
+import { DeleteConfirmationComponent } from '@clients/documents/src/lib/components/delete-confirmation/delete-confirmation.component';
 import { ModalComponent} from 'freyja-ui';
-import {setTopBarOptions} from '../../../../../midgard-angular/src/lib/state/top-bar/top-bar.actions';
-import {CardItemOptions} from '../../../../../midgard-angular/src/lib/components/card-item/card-item-options';
-import {getTopBarSelectedOption} from '../../../../../midgard-angular/src/lib/state/top-bar/top-bar.selectors';
+import {setTopBarOptions} from '@src/midgard/state/top-bar/top-bar.actions';
+import {CardItemOptions} from '@src/midgard/components/card-item/card-item-options';
+import {getTopBarSelectedOption} from '@src/midgard/state/top-bar/top-bar.selectors';
 
 @Component({
   selector: 'lib-documents-main',

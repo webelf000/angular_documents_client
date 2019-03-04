@@ -2,15 +2,15 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DocumentPreviewComponent } from './document-preview.component';
-import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
-import { MatSnackBarStub, StubService } from '@libs/midgard-angular/src/lib/testing-utilities/stubs';
-import { Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { MidgardStoreModule } from '@libs/midgard-angular/src/lib/modules/store/store.module';
-import { documentsMock } from '@libs/midgard-angular/src/lib/testing-utilities/mock.data';
+import { ImageLoadingService } from '@clients/documents/src/lib/services/image-loading.service';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
+import { MatSnackBarStub, StubService } from '@src/midgard/testing-utilities/stubs';
+import { Store } from '@src/midgard/modules/store/store';
+import { MidgardStoreModule } from '@src/midgard/modules/store/store.module';
+import { documentsMock } from '@src/midgard/testing-utilities/mock.data';
 import { of } from 'rxjs';
-import { updateDocument } from '@libs/documents/src/lib/state/documents.actions';
-import { MidgardTranslationTestModule } from '@libs/midgard-angular/src/lib/testing-utilities/translation-testing.module';
+import { updateDocument } from '@clients/documents/src/lib/state/documents.actions';
+import { MidgardTranslationTestModule } from '@src/midgard/testing-utilities/translation-testing.module';
 import { MatSnackBar } from '@angular/material';
 
 describe('DocumentPreviewComponent', () => {

@@ -1,11 +1,11 @@
-import { getAllWorkflowLevel2s } from '@libs/midgard-angular/src/lib/state/workflow-level2/workflow-level2.selectors';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
-import { Document } from '@libs/documents/src/lib/state/models/document.model';
-import { reselect } from '@libs/midgard-angular/src/lib/modules/store';
+import { getAllWorkflowLevel2s } from '@src/midgard/state/workflow-level2/workflow-level2.selectors';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
+import { Document } from '@clients/documents/src/lib/state/models/document.model';
+import { reselect } from '@src/midgard/modules/store';
 import {fileRequestType} from './models/fileRequestType.model';
 import {ImageLoadingService} from '../services/image-loading.service';
-import {HttpService} from '../../../../midgard-angular/src/lib/modules/http/http.service';
-import {Store} from '../../../../midgard-angular/src/lib/modules/store/store';
+import {HttpService} from '@src/midgard/modules/http/http.service';
+import {Store} from '@src/midgard/modules/store/store';
 import {DomSanitizer} from '@angular/platform-browser';
 
 const helper = new FileExtensionHelper();

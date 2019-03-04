@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { FileExtensionHelper } from '@libs/documents/src/lib/helpers/file-extension.helper';
-import { ImageLoadingService } from '@libs/documents/src/lib/services/image-loading.service';
-import { select, Store } from '@libs/midgard-angular/src/lib/modules/store/store';
-import { selectDocument } from '@libs/documents/src/lib/state/documents.selectors';
+import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
+import { ImageLoadingService } from '@clients/documents/src/lib/services/image-loading.service';
+import { select, Store } from '@src/midgard/modules/store/store';
+import { selectDocument } from '@clients/documents/src/lib/state/documents.selectors';
 
 @Injectable()
 export class FileSavingService {

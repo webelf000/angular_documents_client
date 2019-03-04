@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { FileSavingService } from '@libs/documents/src/lib/services/file-saving.service';
+import { FileSavingService } from '@clients/documents/src/lib/services/file-saving.service';
 import { TableEmitObject } from 'freyja-ui/lib/table/table.model';
 
 @Component({

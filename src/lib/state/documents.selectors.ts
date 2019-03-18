@@ -2,16 +2,11 @@ import { getAllWorkflowLevel2s } from '@src/midgard/state/workflow-level2/workfl
 import { FileExtensionHelper } from '@clients/documents/src/lib/helpers/file-extension.helper';
 import { Document } from '@clients/documents/src/lib/state/models/document.model';
 import { reselect } from '@src/midgard/modules/store';
-import {fileRequestType} from './models/fileRequestType.model';
-import {ImageLoadingService} from '../services/image-loading.service';
-import {HttpService} from '@src/midgard/modules/http/http.service';
-import {Store} from '@src/midgard/modules/store/store';
-import {DomSanitizer} from '@angular/platform-browser';
+import { HttpService } from '@src/midgard/modules/http/http.service';
+import { Store } from '@src/midgard/modules/store/store';
 
 const helper = new FileExtensionHelper();
-const httpService = new HttpService();
-const store = new Store();
-const imageLoadingService = new ImageLoadingService(httpService, store);
+
 
 const getDocuments = state => state.documentsReducer;
 

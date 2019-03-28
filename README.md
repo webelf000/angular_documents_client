@@ -1,25 +1,52 @@
-# Documents
++++
+title = "Documents client (Angular)"
++++
 
-Change is good from Gokhan
-Gokhannnnnnn Gokhan
-This module is supposed to be used in a walhall app and after running midgard schematics with a configuration that includes this module, the module will be cloned under the projects directory
+# Documents client (Angular)
 
-## Development server
+## Summary
 
-In your walhall application run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is the frontend client for the [Documents module](https://docs.walhall.io/marketplace/documents-module/). 
 
-## Build
+<!-- ## Dependencies
 
-In your walhall application run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### npm libraries
 
-## Running unit tests
+-  _List of npm packages used_
+-  _List of npm packages used_ -->
 
-In your walhall application run `ng test documents` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Develop this client
 
-## Running end-to-end tests
+-  To **build** the project: `ng build {name-of-module}`  
+  -  The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+-  To **run tests** using [Karma](https://karma-runner.github.io/0.13/index.html): `ng test {name-of-module}`
+-  To **run end-to-end tests** using [Protractor](https://www.protractortest.org/#/): `ng e2e {name-of-module}`
 
-In your walhall application run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## File structure
 
-## Further help
+-  `/components`: Components that do not have roots assigned to them.
+-  `/helpers`: The client's helper classes.
+-  `/pages`: Components that have roots assigned to them.
+-  `/services`: Classes that provide data.
+-  `/state`: State-related files and data models.
+-  `/styles`: Contains styles specific to the client.
+-  `routing.module.ts`: Where the client's routes are defined.
+-  `ngModule`: Where components, services, pipes, etc. are defined.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Services
+
+This client connects to the following services:
+
+-  [Documents service (Django)](https://docs.walhall.io/marketplace/documents-module/documents-service)
+
+<!-- Document the ways in which this client connects to the service. Methods used, data models used, endpoints used, etc. -->
+
+## API documentation (Compodoc)
+
+Run `npm run compodoc` to generate [Compodoc](https://compodoc.github.io/compodoc/) documentation to the `/documentation` directory.
+
+## License
+
+Copyright &#169;2019 Humanitec GmbH.
+
+This code is released under the Humanitec Affero GPL. See the **LICENSE** file for more information.

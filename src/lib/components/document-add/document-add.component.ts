@@ -47,7 +47,7 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const oauthUser = this.authService.getOauthUser();
     this.selectedOauthUser = {
-      label: oauthUser.name,
+      label: oauthUser.first_name + ' ' + oauthUser.last_name ,
       value: oauthUser.core_user_uuid
     };
   }

@@ -80,15 +80,16 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
-    if (this.selectedOauthUser) {
-      this.documentObject.user_uuid = this.selectedOauthUser.value;
-    }
+
     if (!this.isEditForm) {
       this.fillForm(this.documentObject);
     }
   }
 
   ngOnChanges(changes) {
+    if (this.selectedOauthUser) {
+      this.documentObject.user_uuid = this.selectedOauthUser.value;
+    }
     if (changes.fileToUpload && changes.fileToUpload.currentValue) {
       this.autoFillNameAndDate(changes.fileToUpload.currentValue.name);
     }

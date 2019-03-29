@@ -23,19 +23,6 @@
     </fj-text-input>
   </div>
 
-  <div class="documents-form__field documents-form__field--full-width" *ngIf="userSelectOptions">
-    <fj-native-dropdown
-      [label]="'User'"
-      [width]="'100%'"
-      [formGroup]="documentForm"
-      controlName="user_uuid"
-      [customStyles]="{'width': '100%', 'color': 'black'}"
-      [error]="formErrors.user_uuid"
-      [options]="userSelectOptions"
-    >
-    </fj-native-dropdown>
-  </div>
-
   <div class="documents-form__field documents-form__field--full-width">
     <fj-date-picker
       *ngIf="isEditForm"

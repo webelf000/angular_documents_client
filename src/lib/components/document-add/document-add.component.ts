@@ -19,7 +19,6 @@ export class DocumentAddComponent implements OnInit, OnDestroy {
 
   @ViewChild(DocumentFormComponent) documentForm: DocumentFormComponent;
   @Input() currentWorkflowLevel2;
-  @Input() userSelectOptions;
   @Input() projectSelectOptions;
   @Input() selectedContact = {};
   @Input() currentContactUuuid;

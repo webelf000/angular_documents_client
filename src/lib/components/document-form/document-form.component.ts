@@ -30,7 +30,6 @@ export class DocumentFormComponent implements AfterViewInit, OnChanges {
   @Input() showButtonSpinner = false;
   @Input() selectedOauthUser;
   @Input() modal: Subject<any> = new Subject();
-  @Input() userSelectOptions: any[] = [];
   @Input() projectSelectOptions: any[] = [];
   @Output() uploadDocument: EventEmitter<any> = new EventEmitter();
   @Output() deleteDocument: EventEmitter<any> = new EventEmitter();

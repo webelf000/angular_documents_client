@@ -32,7 +32,6 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   @ViewChild('documentUploadModal') documentUploadModal: ModalComponent;
   @ViewChild('documentPreviewModal') documentPreviewModal: ModalComponent;
 
-  public coreUserList: Observable<any>;
   public workflowLevel2List: Observable<any>;
   public currentWorkflowLevel2: Observable<any>;
   public currentDocument: any;
@@ -96,103 +95,14 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
     });
     // this.defineCardItemOptions();
     // this.defineTableOptions();
-    this.coreUserList = this.getCoreUsers();
     this.workflowLevel2List = this.getWorkFlowLevel2();
     this.getDocuments();
     /**
      * dispatch LOAD actions
      */
     this.store.dispatch(loadWorkflowLevel2());
-    this.store.dispatch(loadCoreuserData());
     this.store.dispatch(loadDocuments());
   }
-
-  /**
-   * TODO: New documents client
-   * defines options for card item components
-   */
-  // private defineCardItemOptions() {
-  //   this.cardItemOptions = {
-  //     title: {
-  //       prop: 'file_name',
-  //       label: 'Document Name'
-  //     },
-  //     picture: {
-  //       thumbnail: 'blobLocalUrl',
-  //       image: 'blobLocalUrl'
-  //     },
-  //     dateHeader1: {
-  //       prop: 'create_date',
-  //       label: 'Created at'
-  //     },
-  //     dateHeader2: {
-  //       prop: 'edit_date',
-  //       label: 'Updated at'
-  //     },
-  //     date1: {
-  //       prop: 'create_date',
-  //       label: 'Created at'
-  //     },
-  //     date2: {
-  //       prop: 'edit_date',
-  //       label: 'Updated at'
-  //     },
-  //     description: {
-  //       prop: 'file_description',
-  //       label: 'Description'
-  //     },
-  //     belowMenuPrimaryAction: {
-  //       label: 'Upload File',
-  //       value: 'new'
-  //     },
-  //     secondaryAction: {
-  //       label: 'Download',
-  //       value: 'download'
-  //     },
-  //     otherActions: [
-  //       {
-  //         label: '•••',
-  //         value: '•••'
-  //       },
-  //       {
-  //         label: 'Delete',
-  //         value: 'delete'
-  //       },
-  //       {
-  //         label: 'Share',
-  //         value: 'share'
-  //       }
-  //     ],
-  //     belowMenuOtherActions: [
-  //       {
-  //         label: '•••',
-  //         value: '•••'
-  //       },
-  //       {
-  //         label: 'Delete',
-  //         value: 'delete'
-  //       },
-  //       {
-  //         label: 'Share',
-  //         value: 'share'
-  //       }
-  //     ]
-  //   };
-  // }
-  //
-  // /**
-  //  * defines options for the table component
-  //  */
-  // private defineTableOptions() {
-  //   this.tableOptions = {
-  //     columns: [
-  //       {name: 'Name', prop: 'file_name', flex: 2, sortable: true, filtering: true},
-  //       {name: 'Date Created', prop: 'create_date', index: 1, flex: 1, cellTemplate: 'date', sortable: true},
-  //       {name: '', cellTemplate: 'actions', actions: ['delete', 'download']},
-  //     ]
-  //   };
-  // }
-
   /**
    * Gets the current workflowlevel2 from the store
    */
@@ -242,27 +152,6 @@ export class DocumentMainComponent implements OnInit, OnDestroy {
   public setPreviwedDoc(document) {
     this.currentDocument = document;
     this.documentPreviewModal.showModal = true;
-  }
-  //
-  /**
-   * load CoreUsers
-   * @return {Observable} - of type Coreuser Array
-   */
-  public getCoreUsers(): Observable<any> {
-
-    return this.store.observable.pipe(
-      select(getAllCoreUsers),
-      map((users) => {
-        const usersOptions: any[] = [];
-        users.data.forEach((user) => {
-          usersOptions.push({
-            label: user.fullName,
-            value: user.core_user_uuid
-          });
-        });
-        return usersOptions;
-      })
-    );
   }
 
   /**

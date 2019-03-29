@@ -28,7 +28,6 @@ export class DocumentPreviewComponent implements OnChanges {
   @Input() currentWorkflowLevel2;
   @Input() document: any;
   @Input() modal: Subject<any> = new Subject();
-  @Input() userSelectOptions: any[] = [];
   @Input() projectSelectOptions: any[] = [];
   @Input() currentContactUuuid;
   @Output() documentDelete: EventEmitter<any> = new EventEmitter();

@@ -33,7 +33,6 @@
 <fj-modal #documentUploadModal [size]="'big'" [customStyles]="{padding: '0px'}">
   <div modal-content style="width: 100%">
     <mg-document-add
-      [userSelectOptions]="coreUserList | async"
       [projectSelectOptions]="workflowLevel2List | async"
       [currentWorkflowLevel2]="currentWorkflowLevel2 | async"
       (documentAdded)= "closeModal()"
@@ -45,7 +44,6 @@
 <fj-modal #documentPreviewModal [size]="'big'" [customStyles]="{padding: '0px'}">
   <div modal-content style="width: 100%">
     <mg-document-preview
-      [userSelectOptions]="coreUserList | async"
       [projectSelectOptions]="workflowLevel2List | async"
       [currentWorkflowLevel2]="currentWorkflowLevel2 | async"
       [document]="currentDocument"

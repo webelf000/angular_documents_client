@@ -19,15 +19,15 @@ export function documentsReducer(state = initialState, action: Action) {
     case LOAD_ALL_DOCUMENTS_COMMIT:
       return addAll(state, action);
     case LOAD_ONE_DOCUMENT_COMMIT:
-      return upsertOne(state, action);
+      return upsertOne(state, action, 'id');
     case CREATE_DOCUMENT_COMMIT:
-      return upsertOne(state, action, 'results');
+      return upsertOne(state, action, 'id', 'results');
     case UPDATE_DOCUMENT_COMMIT:
-      return upsertOne(state, action, 'results');
+      return upsertOne(state, action, 'id', 'results');
     case DELETE_DOCUMENT_COMMIT:
-      return deleteOne(state, action, 'results');
+      return deleteOne(state, action, 'id', 'results');
     case SAVE_BLOB_URL:
-      return upsertOne(state, action, 'results');
+      return upsertOne(state, action, 'id', 'results');
     default:
       return state;
   }
